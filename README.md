@@ -1,7 +1,8 @@
 # tinyacc
-Tiny accounting app for basic tracking personal finances working on LAMP stack
+Tiny accounting app for basic tracking of personal finances. Running on LAMP stack
 
 1. You have to create Database in MySQL server (for example acc_usd)
+
 2. Create tables
 
 	mysql -p acc_usd < mysql_tables.sql
@@ -16,29 +17,38 @@ Tiny accounting app for basic tracking personal finances working on LAMP stack
 
 ===========
 
-Add Document -> place an entry in the system
+* Add Document -> place an entry in the system
 
-for example withdrawal from your checking account:
+If "Accounted" is unchecked - thetransaction is ignored in calculations
 
-Cash On Hand     100     Checking Account       Cash Witdrawal Bank Of the Banks
+
+
+Examples:
+
+withdrawal from your checking account:
+
+Cash On Hand  |   100  |   Checking Account  |     Cash Witdrawal Bank Of the Banks
+
+If "Accounted" is unchecked - thetransaction is ignored in calculations
 
 ---
 
 Initial setup of checking account:
 
-Checking Account    1500   Other       Open Checking account in bank of the Banks
+Checking Account |   1500  | Other   |    Open Checking account in bank of the Banks
 
----
+---------------
 
-General Ledger - to see the transactions for period (by default for the current month
+
+* General Ledger - to see the transactions for period (by default for the current month)
 
 and at the bottom the current Balance
 
 
----
+* Chk acc Dt=Kt  --> you should not have any of these.
 
-Chk acc Dt=Kt  --> you should not have any of these.
+* Acc Statement --> Can see the statement of an account
 
----
+* Text search --> Search through all the transactions
 
 
