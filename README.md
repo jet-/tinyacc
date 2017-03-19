@@ -51,4 +51,4 @@ and at the bottom the current Balance
 
 * Text search --> Search through all the transactions
 
-
+---
