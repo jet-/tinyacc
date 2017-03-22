@@ -136,9 +136,6 @@ table.ref caption {
         <li><a href="check.php?curr=<?php echo $_GET['curr']; ?>"><span>Chk acc Dt=Kt</span></a></li>
         <li><a href="search.php?curr=<?php echo $_GET['curr']; ?>"><span>Text search </span></a></li>
         <li><a href="mortgage.php?curr=<?php echo $_GET['curr']; ?>"><span>Mortgage </span></a></li>
-        <li><a href="add_todo.php?curr=<?php echo $_GET['curr']; ?>"><span>Add ToDo </span></a></li>
-        <li><a href="todo.php?curr=<?php echo $_GET['curr']; ?>"><span>ToDo </span></a></li>
-        <li><a href="events.php?curr=<?php echo $_GET['curr']; ?>"><span>Events </span></a></li>
         <li class="last"><font size="4" color="yellow"><?php echo $_GET['curr']; ?></font> <span></span></li>
       </ul>
     </div>
