@@ -132,10 +132,10 @@ if (isset($_GET['order']) ) {
 }
 
 $result = mysql_query ($query );
-#echo "***". $query . "***";
+
 
 echo "<br> Accounted! <br>";
-#echo "<a href=\"k.php\"</a>Main Menu";
+
 
 }
 

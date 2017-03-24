@@ -6,18 +6,6 @@ $userName = "root";
 $password = "password";
 $dbName = "acc_" . $curr;
 
-#print "|";
-#echo $_GET["$curr"];
-#print "*****";
-#print "$curr";
-#print "n";
-#print "$dbName";
-#print "n";
-
-#$dbName="acc_usd";
-#var_dump($_GET);
-#exit;
-
 // make connection to database
 mysql_connect($hostName, $userName, $password) or die("Unable to connect to host $hostName");
 

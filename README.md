@@ -17,6 +17,7 @@ Tiny accounting app for basic tracking of personal finances. Running on LAMP sta
 
 ===========
 
+
 * Add Document -> place an entry in the system
 
 If "Accounted" is unchecked - thetransaction is ignored in calculations
@@ -27,15 +28,13 @@ Examples:
 
 withdrawal from your checking account:
 
-Cash On Hand  |   100  |   Checking Account  |     Cash Witdrawal Bank Of the Banks
-
-If "Accounted" is unchecked - thetransaction is ignored in calculations
+Cash On Hand  <--   100  <--   Checking Account  --     Cash Witdrawal Bank Of the Banks
 
 ---
 
 Initial setup of checking account:
 
-Checking Account |   1500  | Other   |    Open Checking account in bank of the Banks
+Checking Account <-- 1500 <-- Other   --   Open Checking account in bank of the Banks
 
 ---------------
 

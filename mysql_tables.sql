@@ -33,6 +33,10 @@ CREATE TABLE `texts` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+LOCK TABLES `texts` WRITE;
+INSERT INTO `texts` VALUES (0,1,'');
+UNLOCK TABLES;
+
 
 CREATE TABLE `todo` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,

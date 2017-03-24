@@ -40,19 +40,6 @@ while ($row = mysql_fetch_array($result) ) {
 <?php
 
 
-
-
-
-
-
-#$acnt=1;
-#if (!isset($_GET['account'])){
-  $acnt = $_POST['dt1'];
-#} else {
-#  $acnt = $_GET['account'];
-#}
-
-
 $query="select name from items WHERE id=0". $acnt ;
 $result = mysql_query ($query);
 $row = mysql_fetch_array($result);

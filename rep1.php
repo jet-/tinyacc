@@ -154,12 +154,12 @@ if ($_POST['show_balance'] == "yes" ) {
 	}
 
 	# $data[][1] - item name
-	#	 [2] - oborot DT za cialata baza
-	#	 [3] - oborot CT za cialata baza
+	#	 [2] - DT turnover for the whole db
+	#	 [3] - CT turnover for the whole db
 	#	 [4] - item type Asset / Liability
-	#	 [5] - oborot DT za godinata
-	#	 [6] - oborot CT za godinata
-	#	 [7] - likvidnost +/-
+	#	 [5] - turnover DT per year
+	#	 [6] - turnover CT per year
+	#	 [7] - liquidity +/-
 	#	 [8] - orderby
 	#	 [9] - % prihod
 	#	[10] - % razhod

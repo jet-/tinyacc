@@ -1,5 +1,4 @@
 <?php
-#echo "menu";
 
 ?>
 
@@ -130,12 +129,12 @@ table.ref caption {
   <div class="menu">
       <ul>
         <li><a href="/"><span>Home</span></a></li>
-        <li><a href="entry.php?curr=<?php echo $_GET['curr']; ?>"><span>Add Document</span></a></li>
-        <li><a href="rep1.php?curr=<?php echo $_GET['curr']; ?>"><span>General Ledger</span></a></li>
-        <li><a href="rep2.php?curr=<?php echo $_GET['curr']; ?>"><span>Acc Statement </span></a></li>
-        <li><a href="check.php?curr=<?php echo $_GET['curr']; ?>"><span>Chk acc Dt=Kt</span></a></li>
-        <li><a href="search.php?curr=<?php echo $_GET['curr']; ?>"><span>Text search </span></a></li>
-        <li><a href="mortgage.php?curr=<?php echo $_GET['curr']; ?>"><span>Mortgage </span></a></li>
+        <li><a href="entry.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Add Document</span></a></li>
+        <li><a href="rep1.php?curr=<?php 	echo $_GET['curr']; ?>"><span>General Ledger</span></a></li>
+        <li><a href="rep2.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Acc Statement </span></a></li>
+        <li><a href="check.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Chk acc Dt=Kt</span></a></li>
+        <li><a href="search.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Text search </span></a></li>
+        <li><a href="mortgage.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Mortgage </span></a></li>
         <li class="last"><font size="4" color="yellow"><?php echo $_GET['curr']; ?></font> <span></span></li>
       </ul>
     </div>
