@@ -29,13 +29,13 @@ if ($_POST['show_ledger'] == "yes" ) {
 				" ORDER BY ledger.date desc,ledger.id desc;");
 
 
-	echo "<table class=\"ref\">  ";
+	echo '<table class="table table-bordered tablesorter">  ';
 	echo "<caption> GENERAL LEDGER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: {$_POST['from']} to: {$_POST['to']}";
 	echo "</caption> ";
 	$i=1;
 	if ($row = mysql_fetch_array($result)) {
 
-	echo "<tr> 
+	echo "<thead><tr> 
 		<th> # </th> 
 		<th>Item DT</th>  
 		<th> Ammount </th> 
@@ -45,7 +45,7 @@ if ($_POST['show_ledger'] == "yes" ) {
 		<th>Stat</th> 
 		<th width=25 > Created</th>  
 		<th width=25 >Last Modified</th> 
-	      </tr>";
+	      </tr></thead>";
 
 	  do {
 		echo "<tr>";
@@ -154,12 +154,12 @@ if ($_POST['show_balance'] == "yes" ) {
 	}
 
 	# $data[][1] - item name
-	#	 [2] - DT turnover for the whole db
-	#	 [3] - CT turnover for the whole db
+	#	 [2] - oborot DT za cialata baza
+	#	 [3] - oborot CT za cialata baza
 	#	 [4] - item type Asset / Liability
-	#	 [5] - turnover DT per year
-	#	 [6] - turnover CT per year
-	#	 [7] - liquidity +/-
+	#	 [5] - oborot DT za godinata
+	#	 [6] - oborot CT za godinata
+	#	 [7] - likvidnost +/-
 	#	 [8] - orderby
 	#	 [9] - % prihod
 	#	[10] - % razhod
@@ -243,7 +243,6 @@ if ($_POST['show_balance'] == "yes" ) {
 
 mysql_close();
 ?>
-
 
 
 

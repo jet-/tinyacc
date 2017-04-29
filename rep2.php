@@ -40,7 +40,20 @@ while ($row = mysql_fetch_array($result) ) {
 <?php
 
 
-$query="select name from items WHERE id=0". $acnt ;
+
+
+
+
+
+#$acnt=1;
+#if (!isset($_GET['account'])){
+  $acnt = $_POST['dt1'];
+#} else {
+#  $acnt = $_GET['account'];
+#}
+
+
+$query="select name from items WHERE id=". $acnt ;
 $result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $name=$row['name'];
@@ -88,14 +101,14 @@ $result = mysql_query ($query);
 ?>
 
 
-<table class="ref">
+<table class="table table-bordered tablesorter">  
 <caption> STATEMENT OF ACCOUNT:  <? echo $name; ?>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: <? echo $_POST['from']; ?>  to:  <? echo $_POST['to']; ?> </caption> 
 
 
 <?php
 $i=1;
 if ($row = mysql_fetch_array($result)) {
-   echo "<tr align=\"center\"> <th> # </th> <th>Item DT</th>  <th> Ammount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> <th>Balance</th> </tr>";
+   echo "<thead><tr align=\"center\"> <th> # </th> <th>Item DT</th>  <th> Ammount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> <th>Balance</th> </tr></thead>";
 
    do {
         if ($i%2 ==0 ) {

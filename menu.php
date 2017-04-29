@@ -1,7 +1,9 @@
 <?php
+#echo "menu";
 
 ?>
 
+<link href="css/udd.css" rel="stylesheet" type="text/css">
 
 <style type="text/css">
 
@@ -69,7 +71,7 @@ table.ref caption {
 		background: url(images/main_menu_middle.png) repeat-x;
 		list-style: none;
 		position:relative;
-		width: 1010px;
+		width: 1090px;
 		height: 55px;
 		margin: 0 auto;
 		padding-left:7px;
@@ -129,17 +131,26 @@ table.ref caption {
   <div class="menu">
       <ul>
         <li><a href="/"><span>Home</span></a></li>
-        <li><a href="entry.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Add Document</span></a></li>
-        <li><a href="rep1.php?curr=<?php 	echo $_GET['curr']; ?>"><span>General Ledger</span></a></li>
-        <li><a href="rep2.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Acc Statement </span></a></li>
-        <li><a href="check.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Chk acc Dt=Kt</span></a></li>
-        <li><a href="search.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Text search </span></a></li>
-        <li><a href="mortgage.php?curr=<?php 	echo $_GET['curr']; ?>"><span>Mortgage </span></a></li>
+        <li><a href="entry.php?curr=<?php echo $_GET['curr']; ?>"><span>Add Document</span></a></li>
+        <li><a href="rep1.php?curr=<?php echo $_GET['curr']; ?>"><span>General Ledger</span></a></li>
+        <li><a href="rep2.php?curr=<?php echo $_GET['curr']; ?>"><span>Acc Statement </span></a></li>
+        <li><a href="statistics.php?curr=<?php echo $_GET['curr']; ?>"><span>Statistics</span></a></li>
+        <li><a href="check.php?curr=<?php echo $_GET['curr']; ?>"><span>Chk acc Dt=Kt</span></a></li>
+        <li><a href="search.php?curr=<?php echo $_GET['curr']; ?>"><span>Text search </span></a></li>
+        <li><a href="mortgage.php?curr=<?php echo $_GET['curr']; ?>"><span>Mortgage </span></a></li>
+        <li><a href="add_todo.php?curr=<?php echo $_GET['curr']; ?>"><span>Add ToDo </span></a></li>
+        <li><a href="todo.php?curr=<?php echo $_GET['curr']; ?>"><span>ToDo </span></a></li>
+        <li><a href="events.php?curr=<?php echo $_GET['curr']; ?>"><span>Events </span></a></li>
         <li class="last"><font size="4" color="yellow"><?php echo $_GET['curr']; ?></font> <span></span></li>
       </ul>
     </div>
 </div>
 </div>
 
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.tablesorter.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.custom.min.js"></script>
+<script type="text/javascript" src="js/dmd.js"></script>
 
 

@@ -23,7 +23,7 @@ $result = mysql_query ($query)  or die(mysql_error());
 
 if ($_POST['txt'] <> ""){
 
-echo "<table class=ref>  ";
+        echo '<table class="table table-bordered tablesorter">  ';
 echo "<caption>  Search text: &nbsp;&nbsp;&nbsp; \"".$_POST['txt'] . "\"  &nbsp;&nbsp; ". mysql_num_rows($result). " results found" ;
 echo "</caption> ";
 
@@ -32,7 +32,7 @@ $turn = 0;
 
 
 	if ($row = mysql_fetch_array($result)) {
-	   echo "<tr > <th> </th> <th>Item DT</th>  <th> Ammount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> </tr>";
+	   echo "<thead><tr > <th> </th> <th>Item DT</th>  <th> Ammount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> </tr> </thead>";
 
   do {
 	echo "<tr>";
