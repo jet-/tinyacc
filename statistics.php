@@ -67,7 +67,19 @@ order by ledger.date, items.id");
 
 echo "<table class=\"ref\"  bgcolor=\"#DDD4FF\">
 <tr>
-<th>Year</th> <th>January</th> <th>February</th> <th>March</th> <th>April</th> <th>May</th> <th>June</th> <th>July</th> <th>August</th> <th>September</th> <th>October</th> <th>November</th> <th>December</th>
+    <th>Year</th> 
+    <th>January</th> 
+    <th>February</th> 
+    <th>March</th> 
+    <th>April</th> 
+    <th>May</th> 
+    <th>June</th> 
+    <th>July</th> 
+    <th>August</th> 
+    <th>September</th> 
+    <th>October</th> 
+    <th>November</th> 
+    <th>December</th>
 </tr>";
 
 

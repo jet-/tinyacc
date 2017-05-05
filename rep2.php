@@ -41,33 +41,31 @@ while ($row = mysql_fetch_array($result) ) {
 
 
 
-
-
-
-
-#$acnt=1;
-#if (!isset($_GET['account'])){
-  $acnt = $_POST['dt1'];
-#} else {
-#  $acnt = $_GET['account'];
-#}
+$acnt = $_POST['dt1'];
 
 
 $query="select name from items WHERE id=". $acnt ;
 $result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $name=$row['name'];
-#echo $query;
 
 
 
 
-#get start saldo for the account
-$query="select sum(ammount) as ammount from ledger WHERE ledger.date<=\"". $_POST['to']."\" and ledger.item_dt=\"" . $acnt . "\" ";$result = mysql_query ($query);
+#get start ballance for the account
+$query="
+    SELECT sum(ammount) as ammount from ledger 
+    WHERE ledger.date<=\"". $_POST['to']."\" and ledger.item_dt=\"" . $acnt . "\" ";
+
+$result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $dt_turn=$row['ammount'];
 
-$query="select sum(ammount) as ammount from ledger WHERE ledger.date<=\"". $_POST['to']."\" and  ledger.item_ct=\"" . $acnt . "\" ";$result = mysql_query ($query);
+$query="
+  SELECT sum(ammount) as ammount from ledger 
+  WHERE ledger.date<=\"". $_POST['to']."\" and  ledger.item_ct=\"" . $acnt . "\" ";
+
+$result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $ct_turn=$row['ammount'];
 
@@ -76,39 +74,54 @@ $start_saldo=$dt_turn-$ct_turn;
 
 
 
+$query="
+  SELECT sum(ammount) as ammount from ledger 
+  WHERE ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and ledger.item_dt=\"" . $acnt . "\" ";
 
-
-
-
-$query="select sum(ammount) as ammount from ledger WHERE ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and ledger.item_dt=\"" . $acnt . "\" ";
 $result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $dt_turn=$row['ammount'];
 
-$query="select sum(ammount) as ammount from ledger WHERE ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and  ledger.item_ct=\"" . $acnt . "\" ";
+$query="
+  SELECT sum(ammount) as ammount from ledger 
+  WHERE ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and  ledger.item_ct=\"" . $acnt . "\" ";
+
 $result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $ct_turn=$row['ammount'];
 
 
 
-$query ="SELECT ledger.id as id,  t1.name as name_dt, ledger.ammount, t2.name as name_ct, date, time, created, accounted, texts.text as text, ledger.item_dt as item_dt ".
-	"FROM items t1, items t2, ledger ".
-	"LEFT JOIN texts on ledger.id=texts.docnum where t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and (ledger.item_dt=\"" . $acnt . "\" or ledger.item_ct=\"" . $acnt . "\") ".
-	"ORDER BY ledger.date desc,ledger.id desc;";
+$query = "
+  SELECT ledger.id as id,  t1.name as name_dt, ledger.ammount, t2.name as name_ct, date, time, created, accounted, texts.text as text, ledger.item_dt as item_dt
+  FROM items t1, items t2, ledger 
+  LEFT JOIN texts on ledger.id=texts.docnum where t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and (ledger.item_dt=\"" . $acnt . "\" or ledger.item_ct=\"" . $acnt . "\") 
+  ORDER BY ledger.date desc,ledger.id desc;";
+
 $result = mysql_query ($query);
 
 ?>
 
 
 <table class="table table-bordered tablesorter">  
-<caption> STATEMENT OF ACCOUNT:  <? echo $name; ?>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: <? echo $_POST['from']; ?>  to:  <? echo $_POST['to']; ?> </caption> 
+<caption> STATEMENT OF ACCOUNT:  <? echo $name; ?>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: <? echo $_POST['from'] . " to: " . $_POST['to']; ?> </caption> 
 
 
 <?php
 $i=1;
 if ($row = mysql_fetch_array($result)) {
-   echo "<thead><tr align=\"center\"> <th> # </th> <th>Item DT</th>  <th> Ammount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> <th>Balance</th> </tr></thead>";
+   echo "<thead><tr align=\"center\"> 
+	<th> # </th> 
+	<th>Item DT</th>  
+	<th> Ammount </th> 
+	<th>Item CT</th> 
+	<th> Date </th> 
+	<th>Text</th>  
+	<th>Status</th> 
+	<th> Created</th>  
+	<th>Last Modified</th> 
+	<th>Balance</th> 
+      </tr></thead>";
 
    do {
         if ($i%2 ==0 ) {
