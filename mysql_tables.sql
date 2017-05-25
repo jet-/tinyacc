@@ -24,7 +24,7 @@ CREATE TABLE `ledger` (
   `accounted` tinyint(1) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5089 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
 
 CREATE TABLE `texts` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -34,7 +34,7 @@ CREATE TABLE `texts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 LOCK TABLES `texts` WRITE;
-INSERT INTO `texts` VALUES (0,1,'');
+INSERT INTO `texts` VALUES (1,1,'');
 UNLOCK TABLES;
 
 
