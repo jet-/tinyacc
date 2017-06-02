@@ -46,7 +46,7 @@ if (!isset($_POST['send']) ) {
 </tr>
 
     <tr align="center" valign="top" > 
-    <td>  <input type="text" name="date"   value= "<?= (isset($row['date'])) ? $row['date'] : date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" > </td>
+    <td>  <input type="text" name="date"   value= "<?php echo (isset($row['date'])) ? $row['date'] : date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" > </td>
     <td>  <select name="dt1">
 <?php
     for ($i=1;$i<$counter;$i++) {
@@ -60,7 +60,7 @@ if (!isset($_POST['send']) ) {
 	</select> </td>
 
     <td> 
-	<input type="text" name="amnt1" value= "<?= (isset($row['ammount'])) ? $row['ammount'] : "0.00"; ?>"  size=10 maxlength=10  style="background: #FFFFCC;"  autofocus> 
+	<input type="text" name="amnt1" value= "<?php echo (isset($row['ammount'])) ? $row['ammount'] : "0.00"; ?>"  size=10 maxlength=10  style="background: #FFFFCC;"  autofocus> 
     </td>
 
     <td> 
@@ -80,11 +80,11 @@ if (!isset($_POST['send']) ) {
 
     <td> 
 	<textarea 
-		name=note  rows=4 cols=70 wrap=physical style="background: #FFFFCC;" ><?=(isset($row1['text'])) ? stripslashes($row1['text']) : NULL; ?></textarea> 
+		name=note  rows=4 cols=70 wrap=physical style="background: #FFFFCC;" ><?php echo (isset($row1['text'])) ? stripslashes($row1['text']) : NULL; ?></textarea> 
     </td>
 
     <td> 
-	<input type="checkbox" name="accounted1" value="yes" <?=($row['accounted']) ? "checked" : NULL; ?> <? if (!isset($_GET['order']) ) { echo "checked"; } ?> >
+	<input type="checkbox" name="accounted1" value="yes" <?php echo ($row['accounted']) ? "checked" : NULL; ?> <?php if (!isset($_GET['order']) ) { echo "checked"; } ?> >
     <td>
 </tr>
 
@@ -132,10 +132,10 @@ if (isset($_GET['order']) ) {
 }
 
 $result = mysql_query ($query );
-
+#echo "***". $query . "***";
 
 echo "<br> Accounted! <br>";
-
+#echo "<a href=\"k.php\"</a>Main Menu";
 
 }
 

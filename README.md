@@ -1,4 +1,6 @@
 # tinyacc
+https://github.com/jet-/tinyacc
+
 Tiny accounting app for basic tracking of personal finances. Running on LAMP stack
 
 1. You have to create Database in MySQL server (for example acc_usd)

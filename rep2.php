@@ -28,8 +28,8 @@ while ($row = mysql_fetch_array($result) ) {
     echo "</select> </td>";
 ?>
     &nbsp;&nbsp;&nbsp; 
-   <b> From date</b>: 	<input type="text"   name="from" value= "<?php= date("Y-m")."-01"; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
-   <b> To date</b>:     <input type="text"   name="to"   value= "<?php= date("Y-m-d"); ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
+   <b> From date</b>: 	<input type="text"   name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
+   <b> To date</b>:     <input type="text"   name="to"   value= "<?php echo date("Y-m-d"); ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
 		        <input type="submit" name="send" value="Generate" autofocus>
 <br><br>
 

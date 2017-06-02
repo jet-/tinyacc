@@ -49,10 +49,10 @@ $yearly_payment =  26 * 365.00;
 <fieldset>
 <legend>Projected Mortgage Report</legend>
     &nbsp;&nbsp;&nbsp;&nbsp; <br>
-   <b> Current Ammount</b>: 	<input type="text" name="current_owed"    value= "<?= $current_owed; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
-   <b> Yearly payment </b>: 	<input type="text" name="yearly_payment"  value= "<?= $yearly_payment; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
-   <b> Annual Interest</b>:     <input type="text" name="annual_interest" value= "<?= $annual_interest; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp;
-   <b> Interest Paid </b>:     <input type="text" name="interest_paid"    value= "<?= $interest_paid; ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
+   <b> Current Ammount</b>: 	<input type="text" name="current_owed"    value= "<?php echo $current_owed; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
+   <b> Yearly payment </b>: 	<input type="text" name="yearly_payment"  value= "<?php echo $yearly_payment; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
+   <b> Annual Interest</b>:     <input type="text" name="annual_interest" value= "<?php echo $annual_interest; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp;
+   <b> Interest Paid </b>:     <input type="text" name="interest_paid"    value= "<?php echo $interest_paid; ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
 		        <input type="submit" name="send" value="Generate" autofocus>
 <br><br>
 

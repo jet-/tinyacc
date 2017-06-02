@@ -10,8 +10,8 @@ require_once("menu.php");
 <fieldset>
 <legend>Report</legend>
 
-    <br> <b> From date</b>: <input type="text" name="from" value= "<?php= date("Y-m")."-01"; ?>" size=10 maxlength=10 style="background: #FFFFCC;"> &nbsp;&nbsp;&nbsp;
-    <b> To date</b>:  <input type="text"     name="to"      value= "<?php= date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" >
+    <br> <b> From date</b>: <input type="text" name="from" value= "<? echo date("Y-m")."-01"; ?>" size=10 maxlength=10 style="background: #FFFFCC;"> &nbsp;&nbsp;&nbsp;
+    <b> To date</b>:  <input type="text"     name="to"      value= "<? echo date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" >
 	              <input type="checkbox" name="full_ov" value="yes" > Balance for the period &nbsp;&nbsp;
 	              <input type="checkbox" name="show_ledger" value="yes" checked > Show Ledger &nbsp;&nbsp;
 	              <input type="checkbox" name="show_balance" value="yes" checked> Show Balance &nbsp;&nbsp;
