@@ -7,7 +7,7 @@ require_once("conf.php");
 <br>
 <form name="form" action="<?php echo $PHP_SELF;?>" method="post" enctype="multipart/form-data">
 
-    &nbsp;&nbsp;&nbsp; <b> Text</b>: 	<input type="text" name="txt" value="<?= $_POST['txt'] ; ?>"size=40 maxlength=40  style="background: #FFFFCC;"  autofocus>
+    &nbsp;&nbsp;&nbsp; <b> Text</b>: 	<input type="text" name="txt" value="<?php= $_POST['txt'] ; ?>"size=40 maxlength=40  style="background: #FFFFCC;"  autofocus>
 		<input type="submit" name="send" value="Search">
 <br><br>
 </form>
