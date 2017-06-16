@@ -38,16 +38,4 @@ INSERT INTO `texts` VALUES (1,1,'');
 UNLOCK TABLES;
 
 
-CREATE TABLE `todo` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `todo` varchar(255) DEFAULT NULL,
-  `date` date NOT NULL,
-  `created` datetime DEFAULT NULL,
-  `eta` date DEFAULT NULL,
-  `progress` int(10) unsigned DEFAULT NULL,
-  `priority` int(11) unsigned DEFAULT '3',
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `done` tinyint(1) NOT NULL,
-  UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=85 DEFAULT CHARSET=latin1;
 

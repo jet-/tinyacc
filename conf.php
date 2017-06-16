@@ -2,7 +2,7 @@
 
 $curr = $_GET['curr'];
 $hostName = "localhost";
-$userName = "root";
+$userName = "tinyacc";
 $password = "password";
 $dbName = "acc_" . $curr;
 

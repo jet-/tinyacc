@@ -64,6 +64,7 @@ $yearly_payment =  26 * 365.00;
 
 $current_owed = $_POST['current_owed'];
 $yearly_payment = $_POST['yearly_payment'];
+$annual_interest = $_POST['annual_interest'];
 $interest_paid = $_POST['interest_paid'];
 $total_paid = $current_owed;
 
