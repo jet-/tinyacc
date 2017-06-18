@@ -94,7 +94,7 @@ echo "<caption> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </caption>";
                     $d = $row['date'];
                     echo "</tr> <tr> <td> <b>"  . $row['date'] . "</b></td>";
                 }    
-                echo "<td align='right'>" . number_format($row['amnt'],2) . "</td>" ; 
+                echo "<td align='right'>" . number_format($row['amnt'],0) . "</td>" ; 
                
 	       } while($row = mysql_fetch_array($result));
 
