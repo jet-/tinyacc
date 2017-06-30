@@ -22,7 +22,7 @@ Tiny accounting app for basic tracking of personal finances. Running on LAMP sta
 
 * Add Document -> place an entry in the system
 
-If "Accounted" is unchecked - thetransaction is ignored in calculations
+If "Accounted" is unchecked - the transaction is ignored in calculations
 
 
 
@@ -51,5 +51,9 @@ and at the bottom the current Balance
 * Acc Statement --> Can see the statement of an account
 
 * Text search --> Search through all the transactions
+
+* Statistics --> View the account ballance through months and years
+
+* Mortgage --> Calculation on your mortgage
 
 ---

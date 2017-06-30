@@ -30,6 +30,8 @@ while ($row = mysql_fetch_array($result) ) {
     &nbsp;&nbsp;&nbsp; 
    <b> From date</b>: 	<input type="text"   name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
    <b> To date</b>:     <input type="text"   name="to"   value= "<?php echo date("Y-m-d"); ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
+	                <input type="checkbox" name="table" value="yes" checked> Table &nbsp;&nbsp;
+	                <input type="checkbox" name="graph" value="yes" > Chart &nbsp;&nbsp;
 		        <input type="submit" name="send" value="Generate" autofocus>
 <br><br>
 
@@ -71,6 +73,8 @@ $ct_turn=$row['ammount'];
 
 
 $start_saldo=$dt_turn-$ct_turn;
+$start_saldo1=$dt_turn-$ct_turn;
+
 
 
 
@@ -100,14 +104,11 @@ $query = "
 
 $result = mysql_query ($query);
 
-?>
 
+if ($_POST['table'] == "yes" ) { 
+	echo '<table class="table table-bordered tablesorter">  ';
+	echo "<caption> STATEMENT OF ACCOUNT:  $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: " . $_POST['from'] . " to: " . $_POST['to'] . "</caption> ";
 
-<table class="table table-bordered tablesorter">  
-<caption> STATEMENT OF ACCOUNT:  <?php echo $name; ?>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: <?php echo $_POST['from'] . " to: " . $_POST['to']; ?> </caption> 
-
-
-<?php
 $i=1;
 if ($row = mysql_fetch_array($result)) {
    echo "<thead><tr align=\"center\"> 
@@ -147,17 +148,12 @@ if ($row = mysql_fetch_array($result)) {
 	 echo "<td align=\"center\"> <h6>" . $row['time'] . " </h6></td>";
 
 	 echo "<td align=\"right\"> <h6>" . number_format($start_saldo,2) .  " </h6></td>";
-if ( $acnt ==  $row['item_dt'] ) {
-    $start_saldo = $start_saldo - $row['ammount'];
-      } else {
-    $start_saldo = $start_saldo + $row['ammount'];
-}
-
-
-
-
+        if ( $acnt ==  $row['item_dt'] ) {
+            $start_saldo = $start_saldo - $row['ammount'];
+        } else {
+            $start_saldo = $start_saldo + $row['ammount'];
+        }
 	 echo "</tr>";
-
 	
 } while($row = mysql_fetch_array($result));
 
@@ -169,6 +165,58 @@ echo "Turnover DT: " .  number_format($dt_turn,2) ." <br>";
 echo "Turnover CT: " .  number_format($ct_turn,2) ." <br>";
 echo "    Ammount: " .  number_format($dt_turn - $ct_turn,2) . "<br>";
 echo "</pre>";
+}
 
-mysql_close();
 ?>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+
+<?php
+ echo "['Time', '" . $name ."' ],"; 
+
+ 
+$i=1;
+
+
+$result = mysql_query ($query);
+if ($row = mysql_fetch_array($result)) {
+   do {
+        $i++;
+	echo  "['" . $row['date'] . "',";
+        if ( $acnt ==  $row['item_dt'] ) {
+            $start_saldo1 = $start_saldo1 - $row['ammount'];
+        } else {
+            $start_saldo1 = $start_saldo1 + $row['ammount'];
+        }
+        echo $start_saldo1 . "],";
+
+    } while($row = mysql_fetch_array($result));
+
+} else { echo " <hr> no records found! <hr> ";}
+?>
+]);
+ 
+var options = {
+	curveType: 'function', 
+	hAxis: {direction: -1},
+	title: <?php echo "'" . $name . "'"; ?>  ,vAxis: { title: "" }
+
+};
+ 
+var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+chart.draw(data, options);
+}
+</script>
+
+
+<?php
+if ($_POST['graph'] == "yes" ) { 
+	echo '<div id="chart_div" style="width: 900px; height: 500px;"></div>';
+}
+?>
+
