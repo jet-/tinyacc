@@ -52,7 +52,7 @@ if (!isset($_POST['send']) ) {
     for ($i=1;$i<$counter;$i++) {
         echo "<option value=\"".$data[$i][1]."\"";
         if ($data[$i][1] == $row['item_dt'] ) { 	
-  	  echo "selected=\"selected\" "; 
+            echo "selected=\"selected\" "; 
         }
         echo ">" . $data[$i][2] . "</option>";
     }
@@ -132,10 +132,8 @@ if (isset($_GET['order']) ) {
 }
 
 $result = mysql_query ($query );
-#echo "***". $query . "***";
 
 echo "<br> Accounted! <br>";
-#echo "<a href=\"k.php\"</a>Main Menu";
 
 }
 

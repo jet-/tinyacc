@@ -5,7 +5,7 @@ require_once("conf.php");
 $acnt = "33";    #mortgage interest account ID
 $year = 1;
 
-#get start saldo for the account
+#get start balance for the account
 $query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" ";$result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $dt_turn=$row['ammount'];
@@ -26,7 +26,7 @@ $result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $name=$row['name'];
 
-#get start saldo for the account
+#get start balance for the account
 $query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" ";$result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $dt_turn=$row['ammount'];
@@ -52,8 +52,8 @@ $yearly_payment =  26 * 365.00;
    <b> Current Ammount</b>: 	<input type="text" name="current_owed"    value= "<?php echo $current_owed; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
    <b> Yearly payment </b>: 	<input type="text" name="yearly_payment"  value= "<?php echo $yearly_payment; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
    <b> Annual Interest</b>:     <input type="text" name="annual_interest" value= "<?php echo $annual_interest; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp;
-   <b> Interest Paid </b>:     <input type="text" name="interest_paid"    value= "<?php echo $interest_paid; ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
-		        <input type="submit" name="send" value="Generate" autofocus>
+   <b> Interest Paid </b>:      <input type="text" name="interest_paid"    value= "<?php echo $interest_paid; ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
+                                <input type="submit" name="send" value="Generate" autofocus>
 <br><br>
 
 </fieldset>
@@ -94,11 +94,11 @@ $i=0;
                  echo "<tr style=\"background: #cccccc;\" >";
         }
         $i++;
-	 echo "<td > " . $year . " </td>";
-	 echo "<td align=\"right\"> " . number_format($current_owed,2) . " </td>";
-	 echo "<td align=\"right\">  " . number_format($yearly_payment-$current_owed * $annual_interest,2) . "</td>";
-	 echo "<td align=\"right\">  " . number_format($current_owed * $annual_interest,2) . "</td>";
-	 echo "<td align=\"right\">  " . number_format($interest_paid,2) . "</td>";
+        echo "<td > " . $year . " </td>";
+        echo "<td align=\"right\"> " . number_format($current_owed,2) . " </td>";
+        echo "<td align=\"right\">  " . number_format($yearly_payment-$current_owed * $annual_interest,2) . "</td>";
+        echo "<td align=\"right\">  " . number_format($current_owed * $annual_interest,2) . "</td>";
+        echo "<td align=\"right\">  " . number_format($interest_paid,2) . "</td>";
 
         $current_owed = (($current_owed * $annual_interest) + $current_owed) - $yearly_payment;
         $interest_paid = $interest_paid + ($current_owed * $annual_interest);

@@ -13,11 +13,11 @@ require_once("conf.php");
 </form>
 
 <?php
-$query ="SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, texts.text AS text" . 
-	" FROM items t1, items t2, ledger " . 
-	" LEFT JOIN texts ON ledger.id=texts.docnum ".
-	" WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND texts.text LIKE \"%". $_POST['txt']."%\"  ".
-	" ORDER BY ledger.date desc,ledger.id desc;";
+$query ="SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, texts.text AS text 
+	FROM items t1, items t2, ledger 
+	LEFT JOIN texts ON ledger.id=texts.docnum 
+	WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND texts.text LIKE \"%". $_POST['txt']."%\"  
+	ORDER BY ledger.date desc,ledger.id desc;";
 
 $result = mysql_query ($query)  or die(mysql_error());
 
@@ -49,18 +49,18 @@ $turn = 0;
 		 echo "<td width=\"120\"> " . $row['name_ct'] . " </td>";
 		 echo "<td width=\"100\" align=\"center\"> " . $row['date'] . " </td>";
 		 echo "<td width=\"400\"> " . ($row['text']=="" ? ".": $row['text']) . " </td>";
-	 echo "<td width=\"10\" align=\"center\"> "; 				
-	 	if  ($row['accounted'] == "1") {
+         echo "<td width=\"10\" align=\"center\"> "; 				
+         if  ($row['accounted'] == "1") {
 	 		echo '<img src="images/checkmark.png" width="23" height="23" alt="" />';
 	 		} else {
 			echo '<img src="images/red-x.png" width="20" height="20" alt="" />';
 	 		}
-	 echo 		" </td>";         
+         echo 		" </td>";         
 		 echo "<td align=\"center\"> <h6>" . $row['created'] . " </h6></td>";
 		 echo "<td align=\"center\"> <h6>" . $row['time'] . " </h6></td>";
 		 echo "</tr>";
 	
-    $turn = $turn + $row['ammount'];
+         $turn = $turn + $row['ammount'];
 	   } while ($row = mysql_fetch_array($result));
 
 

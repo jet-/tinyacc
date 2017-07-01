@@ -57,3 +57,7 @@ and at the bottom the current Balance
 * Mortgage --> Calculation on your mortgage
 
 ---
+
+If you want to donate - Bitcoin address: 1L25rmhgM9yvJYcUsUkNJf49EfFjQYmCbt
+
+---
