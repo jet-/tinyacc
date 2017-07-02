@@ -32,6 +32,7 @@ while ($row = mysql_fetch_array($result) ) {
    <b> To date</b>:     <input type="text"   name="to"   value= "<?php echo date("Y-m-d"); ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
 	                <input type="checkbox" name="table" value="yes" checked> Table &nbsp;&nbsp;
 	                <input type="checkbox" name="graph" value="yes" > Chart &nbsp;&nbsp;
+	                <input type="checkbox" name="rel" value="yes" > Relative &nbsp;&nbsp;
 		        <input type="submit" name="send" value="Generate" autofocus>
 <br><br>
 
@@ -74,9 +75,13 @@ $ct_turn=$row['ammount'];
 
 $start_saldo=$dt_turn-$ct_turn;
 $start_saldo1=$dt_turn-$ct_turn;
+$start_saldo1=0;
 
-
-
+if ($_POST['rel'] == "yes" ) { 
+	$start_saldo1=0;
+} else {
+	$start_saldo1=$dt_turn-$ct_turn;
+}
 
 $query="
   SELECT sum(ammount) as ammount from ledger 
