@@ -172,5 +172,8 @@ echo '
 
 <div id="donutchart1" style="width: 900px; height: 500px;"></div>
 
+Expenses: <?php  echo number_format((-1) * $razhod,2); ?> <br>
+
 <div id="donutchart2" style="width: 900px; height: 500px;"></div>
 
+Revenue: <?php  echo number_format($prihod,2); ?> <br>
