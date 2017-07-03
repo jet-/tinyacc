@@ -93,7 +93,7 @@ require_once("menu.php");
 
 
 echo '
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript" src="js/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -109,14 +109,11 @@ echo '
 	$liq=0;
 
 	for ($i=1;$i<$counter;$i++) {
-	    if ($data[$i][2] <> 0 or $data[$i][3] <> 0) {
-            if ($data[$i][4] == "L") {
+            if ($data[$i][4] == "L" and $data[$i][2] - $data[$i][3] > 0){
                 echo "[' ". $data[$i][1] . "', ";
                 echo  $data[$i][2] - $data[$i][3] . "],";
             }
         }
-	}
-
 
 ?>
 
@@ -138,30 +135,24 @@ echo '
 
 <?php
 echo '
-   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript" src="js/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           [\'\', \'\'],
-
 ';
-
-
 
 
 	$liq=0;
 
 	for ($i=1;$i<$counter;$i++) {
-	    if ($data[$i][2] <> 0 or $data[$i][3] <> 0) {
-            if ($data[$i][4] == "A") {
+           if ($data[$i][4] == "A" and $data[$i][3] - $data[$i][2]>0 ) {
                 echo "[' ". $data[$i][1] . "', ";
                 echo  $data[$i][3] - $data[$i][2] . "],";
             }
         }
-	}
-
 
 ?>
 
