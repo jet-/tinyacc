@@ -165,8 +165,6 @@ if ($_POST['show_balance'] == "yes" ) {
 	#	 [6] - yearly turnover CT
 	#	 [7] - liquidity +/-
 	#	 [8] - orderby
-	#	 [9] - % prihod
-	#	[10] - % razhod
 	#	[11] - account id
 
 	echo "<table  class=\"ref\"  bgcolor=\"#DDD4FF\">";

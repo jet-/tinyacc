@@ -71,7 +71,7 @@ table.ref caption {
 		background: url(images/main_menu_middle.png) repeat-x;
 		list-style: none;
 		position:relative;
-		width: 1090px;
+		width: 1300px;
 		height: 55px;
 		margin: 0 auto;
 		padding-left:7px;
@@ -135,6 +135,7 @@ table.ref caption {
         <li><a href="rep1.php?curr=<?php echo $_GET['curr']; ?>"><span>General Ledger</span></a></li>
         <li><a href="rep2.php?curr=<?php echo $_GET['curr']; ?>"><span>Acc Statement </span></a></li>
         <li><a href="statistics.php?curr=<?php echo $_GET['curr']; ?>"><span>Statistics</span></a></li>
+        <li><a href="rep3.php?curr=<?php echo $_GET['curr']; ?>"><span>Expenses/Revenue </span></a></li>
         <li><a href="check.php?curr=<?php echo $_GET['curr']; ?>"><span>Chk acc Dt=Kt</span></a></li>
         <li><a href="search.php?curr=<?php echo $_GET['curr']; ?>"><span>Text search </span></a></li>
         <li><a href="mortgage.php?curr=<?php echo $_GET['curr']; ?>"><span>Mortgage </span></a></li>
