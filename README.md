@@ -11,11 +11,14 @@ Tiny accounting app for basic tracking of personal finances. Running on LAMP sta
 
 3. Create user in MySql and grant access for the database
 
-4. Set username/ password in conf.php file
+4. Change the conf.php file accordingly
 
 5. Copy all the files from the project to your web server 
 
-6. Point the browser to https://server/acc_folder/rep1.php?curr=usd
+	git clone https://github.com/jet-/tinyacc.git
+
+
+6. Point the browser to https://server/tinyacc/rep1.php?curr=usd
 
 ===========
 
@@ -25,18 +28,32 @@ Tiny accounting app for basic tracking of personal finances. Running on LAMP sta
 If "Accounted" is unchecked - the transaction is ignored in calculations
 
 
+Do an initial data entry to initialise the data - for example loading your bank accounts/cards and cash, I am doing it by: 
 
-Examples:
+	cash -- Ammount -- Other
 
-withdrawal from your checking account:
+Or 
 
-Cash On Hand  <--   100  <--   Checking Account  --     Cash Witdrawal Bank Of the Banks
+	Checking account -- Amount -- Other
 
----
+You can start adding your daily transactions as they happen. For example cash withdrawal at an ATM: 
 
-Initial setup of checking account:
+	cash -- Amount -- Checking account
 
-Checking Account <-- 1500 <-- Other   --   Open Checking account in bank of the Banks
+Paying a bill: 
+
+	Electrical bills -- Amount -- Checking account
+
+Depositing money in Savings account: 
+
+	Savings account -- Amount -- Cash
+
+Documents which are not accounted (don't have the flag "accounted") are ignored in calculations.
+
+Balances are calculated dynamically and you can account or "un-account" or edit old documents at your will.
+
+You can create more databases - for example for different currencies (I have one for bitcoins or I should say mini Bitcoins) .There are different reports and charts to have a better clue about you finances. Using the program you can also check when you bought something and whether warranty expired or not by searching by text or part of the text.
+
 
 ---------------
 
@@ -53,6 +70,8 @@ and at the bottom the current Balance
 * Text search --> Search through all the transactions
 
 * Statistics --> View the account ballance through months and years
+
+* Expenses/Revenue --> To see an report with chart representation 
 
 * Mortgage --> Calculation on your mortgage
 
