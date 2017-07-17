@@ -10,8 +10,8 @@ require_once("menu.php");
 <fieldset>
 <legend>Report</legend>
 
-    <br> <b> From date</b>: <input type="text" name="from" value= "<? echo date("Y-m")."-01"; ?>" size=10 maxlength=10 style="background: #FFFFCC;"> &nbsp;&nbsp;&nbsp;
-    <b> To date</b>:  <input type="text"     name="to"      value= "<? echo date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" >
+    <br> <b> From date</b>: <input type="text" name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10 style="background: #FFFFCC;"> &nbsp;&nbsp;&nbsp;
+    <b> To date</b>:  <input type="text"     name="to"      value= "<?php echo date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" >
 		      <input type="submit"   name="send"    value="Generate" autofocus >
 <br><br>
 </fieldset>
@@ -131,8 +131,6 @@ echo '
 </script>
 
 
-
-
 <?php
 echo '
    <script type="text/javascript" src="js/loader.js"></script>
@@ -143,7 +141,6 @@ echo '
         var data = google.visualization.arrayToDataTable([
           [\'\', \'\'],
 ';
-
 
 	$liq=0;
 
@@ -172,8 +169,9 @@ echo '
 
 <div id="donutchart1" style="width: 900px; height: 500px;"></div>
 
-Expenses: <?php  echo number_format((-1) * $razhod,2); ?> <br>
-
+Expenses: <b><?php  echo number_format((-1) * $razhod,2); ?> </b><br>
+<p>
+&nbspRevenue: <b><?php  echo number_format($prihod,2); ?> </b><br>
 <div id="donutchart2" style="width: 900px; height: 500px;"></div>
 
-Revenue: <?php  echo number_format($prihod,2); ?> <br>
+
