@@ -108,11 +108,12 @@ $query = "
   ORDER BY ledger.date desc,ledger.id desc;";
 
 $result = mysql_query ($query);
+$rowCount = mysql_num_rows($result);
 
 
-if ($_POST['table'] == "yes" ) { 
+if ($_POST['table'] == "yes" and $rowCount > 0 ){ 
 	echo '<table class="table table-bordered tablesorter">  ';
-	echo "<caption> STATEMENT OF ACCOUNT:  $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: " . $_POST['from'] . " to: " . $_POST['to'] . "</caption> ";
+	echo "<caption> STATEMENT OF ACCOUNT:  $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: " . $_POST['from'] . " to: " . $_POST['to'] . "&nbsp;&nbsp;&nbsp;&nbsp; $rowCount rows </caption> ";
 
 $i=1;
 if ($row = mysql_fetch_array($result)) {

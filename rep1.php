@@ -20,19 +20,20 @@ require_once("menu.php");
 </fieldset>
 </form>
 <?php
-
-if ($_POST['show_ledger'] == "yes" ) { 
-	$result = mysql_query ("
+$result = mysql_query ("
 	  SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, texts.text AS text
 	  FROM items t1, items t2, ledger
 	  LEFT JOIN texts ON ledger.id=texts.docnum
 	  WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND ledger.date>=\"". $_POST['from']."\" AND ledger.date<=\"". $_POST['to']."\" 
 	  ORDER BY ledger.date desc,ledger.id desc;");
 
+$rowCount = mysql_num_rows($result);
+
+if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) { 
 
 	echo '<table class="table table-bordered tablesorter">  ';
 	echo "<caption> GENERAL LEDGER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: {$_POST['from']} to: {$_POST['to']}";
-	echo "</caption> ";
+	echo "&nbsp;&nbsp;&nbsp;&nbsp; $rowCount rows </caption> ";
 	$i=1;
 	if ($row = mysql_fetch_array($result)) {
 
