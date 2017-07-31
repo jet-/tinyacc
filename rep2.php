@@ -33,6 +33,7 @@ while ($row = mysql_fetch_array($result) ) {
 	                <input type="checkbox" name="table" value="yes" checked> Table &nbsp;&nbsp;
 	                <input type="checkbox" name="graph" value="yes" > Chart &nbsp;&nbsp;
 	                <input type="checkbox" name="rel" value="yes" > Relative &nbsp;&nbsp;
+	                <input type="checkbox" name="diff" value="yes" > Differential &nbsp;&nbsp;
 		        <input type="submit" name="send" value="Generate" autofocus>
 <br><br>
 
@@ -199,7 +200,11 @@ if ($row = mysql_fetch_array($result)) {
         } else {
             $start_saldo1 = $start_saldo1 + $row['ammount'];
         }
-        echo $start_saldo1 . "],";
+	if ($_POST['diff'] == "yes" ) { 
+		echo abs($row['ammount']) . "],";
+	} else {
+		echo $start_saldo1 . "],";
+	}
 
     } while($row = mysql_fetch_array($result));
 

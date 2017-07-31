@@ -39,7 +39,8 @@ require_once("menu.php");
 	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_dt=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
-		      and ledger.date>=\"" . $_POST['from'] . "\" and accounted group by items.id
+		      and ledger.date>=\"" . $_POST['from'] . "\"  
+	    GROUP BY items.id
 	    ORDER BY orderby ");
 
 
@@ -52,7 +53,7 @@ require_once("menu.php");
 	$result = mysql_query ("
 	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
 	    FROM items
-	    LEFT JOIN  ledger ON ledger.item_ct=items.id and ledger.date<=\"" . $_POST['to'] . "\" and  accounted
+	    LEFT JOIN  ledger ON ledger.item_ct=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
 		      and ledger.date>=\"" . $_POST['from'] . "\" 
 	    GROUP BY items.id
 	    ORDER BY orderby ");
@@ -100,7 +101,6 @@ echo '
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           [\'\', \' \'],
-
 ';
 
 

@@ -105,7 +105,8 @@ if ($_POST['show_balance'] == "yes" ) {
 	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_dt=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
-		      and ledger.date>=\"" . $_POST['from'] . "\" and accounted group by items.id
+		      and ledger.date>=\"" . $_POST['from'] . "\" and accounted 
+	    GROUP BY items.id
 	    ORDER BY orderby ");
 
 
@@ -118,8 +119,8 @@ if ($_POST['show_balance'] == "yes" ) {
 	$result = mysql_query ("
 	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
 	    FROM items
-	    LEFT JOIN  ledger ON ledger.item_ct=items.id and ledger.date<=\"" . $_POST['to'] . "\" and  accounted
-		      and ledger.date>=\"" . $_POST['from'] . "\" 
+	    LEFT JOIN  ledger ON ledger.item_ct=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
+		      and ledger.date>=\"" . $_POST['from'] . "\"  and  accounted 
 	    GROUP BY items.id
 	    ORDER BY orderby ");
 
