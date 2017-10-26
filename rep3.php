@@ -39,7 +39,7 @@ require_once("menu.php");
 	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_dt=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
-		      and ledger.date>=\"" . $_POST['from'] . "\"  
+		      and ledger.date>=\"" . $_POST['from'] . "\"  and accounted
 	    GROUP BY items.id
 	    ORDER BY orderby ");
 
@@ -54,7 +54,7 @@ require_once("menu.php");
 	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_ct=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
-		      and ledger.date>=\"" . $_POST['from'] . "\" 
+		      and ledger.date>=\"" . $_POST['from'] . "\" and accounted
 	    GROUP BY items.id
 	    ORDER BY orderby ");
 
