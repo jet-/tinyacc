@@ -86,7 +86,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	#ov
 	#type_: L - razhod; A - prihod
-	$result = mysql_query ("select  id, name, type, liquidity, orderby from items ORDER by orderby ");
+	$result = mysql_query ("SELECT  id, name, type, liquidity, orderby FROM items ORDER by orderby ");
 	$counter=1;
 	while ($row0 = mysql_fetch_array($result) ) {
 	    $data[$counter][1]= $row0['name'];
