@@ -27,11 +27,11 @@ $row = mysql_fetch_array($result);
 $name=$row['name'];
 
 #get start balance for the account
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" ";$result = mysql_query ($query);
+$query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" and accounted";$result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $dt_turn=$row['ammount'];
 
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" ";$result = mysql_query ($query);
+$query="select sum(ammount) as ammount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" and accounted";$result = mysql_query ($query);
 $row = mysql_fetch_array($result);
 $ct_turn=$row['ammount'];
 
