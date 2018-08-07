@@ -15,13 +15,13 @@ while ($row = mysql_fetch_array($result) ) {
 if (!isset($_POST['send']) ) {
 
     if (isset($_GET['order']) ) {
-	$query="SELECT date, item_dt, ammount, item_ct, accounted FROM ledger WHERE id=" . $_GET['order'];
+	$query="SELECT date, item_dt, ammount, item_ct, accounted, text FROM ledger WHERE id=" . $_GET['order'];
 	$result = mysql_query ($query);
 	$row = mysql_fetch_array($result);
 
-	$query="SELECT text FROM texts WHERE docnum=" . $_GET['order'];
-	$result = mysql_query ($query);
-	$row1 = mysql_fetch_array($result);
+#	$query="SELECT text FROM texts WHERE docnum=" . $_GET['order'];
+#	$result = mysql_query ($query);
+#	$row1 = mysql_fetch_array($result);
     }
 
 ?>
@@ -80,7 +80,7 @@ if (!isset($_POST['send']) ) {
 
     <td> 
 	<textarea 
-		name=note  rows=4 cols=70 wrap=physical style="background: #FFFFCC;" ><?php echo (isset($row1['text'])) ? stripslashes($row1['text']) : NULL; ?></textarea> 
+		name=note  rows=4 cols=70 wrap=physical style="background: #FFFFCC;" ><?php echo (isset($row['text'])) ? stripslashes($row['text']) : NULL; ?></textarea> 
     </td>
 
     <td> 
@@ -105,7 +105,7 @@ if (isset($_GET['order']) ) {
     $query= "INSERT INTO ";
 }
 
-$query.=" ledger set item_dt=" . $_POST['dt1'] . ", ammount=\"" . $_POST['amnt1'] . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\"  ";
+$query.=" ledger set item_dt=" . $_POST['dt1'] . ", ammount=\"" . $_POST['amnt1'] . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\" ,text=\"" . mysql_real_escape_string($_POST['note']) . "\"  ";
 
 if (!isset($_GET['order']) ) {
     $query .= " , created=\"". date('c') . "\" " ;
@@ -123,15 +123,15 @@ if (isset($_GET['order']) ) {
 
 #echo $query;
 $result = mysql_query ($query);
-$last_ledger=mysql_insert_id();
+#$last_ledger=mysql_insert_id();
 
-if (isset($_GET['order']) ) {
-    $query= "UPDATE texts set text=\"" . mysql_real_escape_string($_POST['note']) . "\" WHERE docnum=" . $_GET['order'];
-} else {
-    $query= "INSERT INTO texts set docnum=\"" . $last_ledger . "\" , text=\"" . mysql_real_escape_string($_POST['note']) . "\"";
-}
+#if (isset($_GET['order']) ) {
+#    $query= "UPDATE texts set text=\"" . mysql_real_escape_string($_POST['note']) . "\" WHERE docnum=" . $_GET['order'];
+#} else {
+#    $query= "INSERT INTO texts set docnum=\"" . $last_ledger . "\" , text=\"" . mysql_real_escape_string($_POST['note']) . "\"";
+#}
 
-$result = mysql_query ($query );
+#$result = mysql_query ($query );
 
 echo "<br> Accounted! <br>";
 

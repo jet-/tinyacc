@@ -21,9 +21,8 @@ require_once("menu.php");
 </form>
 <?php
 $result = mysql_query ("
-	  SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, texts.text AS text
+	  SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, text
 	  FROM items t1, items t2, ledger
-	  LEFT JOIN texts ON ledger.id=texts.docnum
 	  WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND ledger.date>=\"". $_POST['from']."\" AND ledger.date<=\"". $_POST['to']."\" 
 	  ORDER BY ledger.date desc,ledger.id desc;");
 
@@ -58,9 +57,9 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 		}
 		$i++;
 		 echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] ."\">". $row['id'] .		"</a></td>";
-		 echo "<td width=\"120\"> " . $row['name_dt'] .	" </td>";
+		 echo "<td width=\"140\"> " . $row['name_dt'] .	" </td>";
 		 echo "<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . " </td>";
-		 echo "<td width=\"120\"> " . $row['name_ct'] .	" </td>";
+		 echo "<td width=\"140\"> " . $row['name_ct'] .	" </td>";
 		 echo "<td width=\"100\" align=\"center\"> " . $row['date'] . " </td>";
 		 echo "<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . " </td>";
 		 echo "<td width=\"10\" align=\"center\"> "; 				

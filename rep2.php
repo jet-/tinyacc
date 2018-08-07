@@ -103,9 +103,9 @@ $ct_turn=$row['ammount'];
 
 
 $query = "
-  SELECT ledger.id as id,  t1.name as name_dt, ledger.ammount, t2.name as name_ct, date, time, created, accounted, texts.text as text, ledger.item_dt as item_dt
+  SELECT ledger.id as id,  t1.name as name_dt, ledger.ammount, t2.name as name_ct, date, time, created, accounted, text, ledger.item_dt as item_dt
   FROM items t1, items t2, ledger 
-  LEFT JOIN texts on ledger.id=texts.docnum where t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and (ledger.item_dt=\"" . $acnt . "\" or ledger.item_ct=\"" . $acnt . "\") 
+  WHERE t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and (ledger.item_dt=\"" . $acnt . "\" or ledger.item_ct=\"" . $acnt . "\") 
   ORDER BY ledger.date desc,ledger.id desc;";
 
 $result = mysql_query ($query);

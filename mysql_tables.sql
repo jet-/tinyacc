@@ -31,19 +31,10 @@ CREATE TABLE `ledger` (
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `accounted` tinyint(1) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
-
-CREATE TABLE `texts` (
-  `id` int(10) unsigned NOT NULL DEFAULT '1',
-  `docnum` int(10) unsigned DEFAULT NULL,
   `text` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5990 DEFAULT CHARSET=latin1 COMMENT='latin1_swedish_ci';
 
-LOCK TABLES `texts` WRITE;
-INSERT INTO `texts` VALUES (1,1,'');
-UNLOCK TABLES;
 
 
 

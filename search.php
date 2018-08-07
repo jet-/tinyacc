@@ -13,10 +13,9 @@ require_once("conf.php");
 </form>
 
 <?php
-$query ="SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, texts.text AS text 
+$query ="SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, text 
 	FROM items t1, items t2, ledger 
-	LEFT JOIN texts ON ledger.id=texts.docnum 
-	WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND texts.text LIKE \"%". $_POST['txt']."%\"  
+	WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND text LIKE \"%". $_POST['txt']."%\"  
 	ORDER BY ledger.date desc,ledger.id desc;";
 
 $result = mysql_query ($query)  or die(mysql_error());
