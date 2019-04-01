@@ -3,13 +3,13 @@ https://github.com/jet-/tinyacc
 
 Tiny accounting app for basic tracking of personal finances. Running on LAMP stack
 
-1. You have to create Database in MySQL server (for example acc_usd)
+1. You have to create Database in MySQL/MariaDB server (for example acc_usd)
 
 2. Create tables
 
 	mysql -p acc_usd < mysql_tables.sql
 
-3. Create user in MySql and grant access for the database
+3. Create user in MySQL/MariaDB and grant access for the database
 
 4. Change the conf.php file accordingly
 
