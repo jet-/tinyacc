@@ -1,9 +1,11 @@
 <?php
 require_once("menu.php");
 require_once("conf.php");
-$result = mysql_query ("select  id, name from items ORDER BY orderby");
+
+
+$result = $mysqli->query("select  id, name from items ORDER BY orderby");
 $counter=1;
-while ($row = mysql_fetch_array($result) ) {
+while ($row = $result->fetch_assoc() ) {
     $data[$counter][1]= $row['id'];
     $data[$counter][2]= $row['name'];
     $counter++;
@@ -11,12 +13,10 @@ while ($row = mysql_fetch_array($result) ) {
 if (!isset($_POST['send']) ) {
     if (isset($_GET['order']) ) {
 	$query="SELECT date, item_dt, ammount, item_ct, accounted, text FROM ledger WHERE id=" . $_GET['order'];
-	$result = mysql_query ($query);
-	$row = mysql_fetch_array($result);
-#	$query="SELECT text FROM texts WHERE docnum=" . $_GET['order'];
-#	$result = mysql_query ($query);
-#	$row1 = mysql_fetch_array($result);
+	$result = $mysqli->query($query);
+	$row = $result->fetch_assoc();
     }
+
 ?>
 <br><br><br>
 <form name="form" action="<?php echo $PHP_SELF;?>" method="post" enctype="multipart/form-data">
@@ -107,17 +107,12 @@ if ($_POST['accounted1'] == "yes" ) {
 if (isset($_GET['order']) ) {
     $query .= " WHERE id=" . $_GET['order'];
 }
-#echo $query;
-$result = mysql_query ($query);
-#$last_ledger=mysql_insert_id();
-#if (isset($_GET['order']) ) {
-#    $query= "UPDATE texts set text=\"" . mysql_real_escape_string($_POST['note']) . "\" WHERE docnum=" . $_GET['order'];
-#} else {
-#    $query= "INSERT INTO texts set docnum=\"" . $last_ledger . "\" , text=\"" . mysql_real_escape_string($_POST['note']) . "\"";
-#}
-#$result = mysql_query ($query );
+
+$result = $mysqli->query($query);
 echo "<br> Accounted! <br>";
+echo "New record has id: " . mysqli_insert_id($mysqli); 
+
 }
-mysql_close();
+$mysqli->close();
 ?>
 

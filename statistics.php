@@ -4,10 +4,10 @@ require_once("conf.php");
 require_once("menu.php");
 
 
-$result = mysql_query ("select  id, name from items WHERE type REGEXP 'L|A' ORDER BY orderby");
+$result = $mysqli->query("select  id, name from items WHERE type REGEXP 'L|A' ORDER BY orderby");
 
 $counter=1;
-while ($row = mysql_fetch_array($result) ) {
+while ($row = $result->fetch_assoc() ) {
     $data[$counter][1]= $row['id'];
     $data[$counter][2]= $row['name'];
     $counter++;
@@ -40,17 +40,17 @@ while ($row = mysql_fetch_array($result) ) {
 
 <?php
 
-  $acnt = $_POST['dt1'];
+$acnt = $_POST['dt1'];
 
 
 $query="select name,type from items WHERE id=". $acnt ;
-$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $name=$row['name'];
 
 
 if ($row['type']== "L" ) {
-	$result = mysql_query ("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.ammount) AS amnt FROM items
+	$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.ammount) AS amnt FROM items
     LEFT OUTER JOIN  ledger ON ledger.item_dt=items.id and accounted
     WHERE accounted and items.type REGEXP 'L|A' and items.id = $acnt  
     group by DATE_FORMAT(ledger.date,'%Y %m'), items.id
@@ -58,7 +58,7 @@ if ($row['type']== "L" ) {
 
 } else {
 
-$result = mysql_query ("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.ammount) AS amnt                               
+$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.ammount) AS amnt                               
     FROM items
     LEFT OUTER JOIN  ledger ON ledger.item_ct=items.id and accounted
     WHERE accounted and items.type REGEXP 'L|A' and items.id = $acnt  
@@ -87,9 +87,9 @@ echo "<table class=\"ref\"  bgcolor=\"#DDD4FF\">
 echo "<caption> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </caption>"; 
 
     $d ="";
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = $result->fetch_assoc() ) {
 
-		do {
+	while($row = $result->fetch_assoc() ) {
             if ($d <> $row['date']) 
                 {
                     $d = $row['date'];
@@ -97,14 +97,14 @@ echo "<caption> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </caption>";
                 }    
                 echo "<td align='right'>" . number_format($row['amnt'],0) . "</td>" ; 
                
-	       } while($row = mysql_fetch_array($result));
+	       } 
 
 	} else { echo " <hr> no records found! <hr> ";}
 
 echo "</table>";
 
 
-mysql_close();
+$mysqli->close();
 ?>
 
 

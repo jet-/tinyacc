@@ -18,22 +18,23 @@ $query ="SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS
 	WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND text LIKE \"%". $_POST['txt']."%\"  
 	ORDER BY ledger.date desc,ledger.id desc;";
 
-$result = mysql_query ($query)  or die(mysql_error());
+$result = $mysqli->query($query);
+$rowCount = mysqli_num_rows($result);
 
 if ($_POST['txt'] <> ""){
 
         echo '<table class="table table-bordered tablesorter">  ';
-echo "<caption>  Search text: &nbsp;&nbsp;&nbsp; \"".$_POST['txt'] . "\"  &nbsp;&nbsp; ". mysql_num_rows($result). " results found" ;
+echo "<caption>  Search text: &nbsp;&nbsp;&nbsp; \"".$_POST['txt'] . "\"  &nbsp;&nbsp; ". $rowCount . " results found" ;
 echo "</caption> ";
 
 $i=1;
 $turn = 0;
 
 
-	if ($row = mysql_fetch_array($result)) {
+	if ($result = $mysqli->query($query)) {
 	   echo "<thead><tr > <th> </th> <th>Item DT</th>  <th> Ammount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> </tr> </thead>";
 
-  do {
+  while($row = $result->fetch_assoc()) {
 	echo "<tr>";
 	if ($i%2 ==0 ) {
 		 echo "<tr style=\"background: #eeeeee;\" >";
@@ -60,7 +61,7 @@ $turn = 0;
 		 echo "</tr>";
 	
          $turn = $turn + $row['ammount'];
-	   } while ($row = mysql_fetch_array($result));
+	   } 
 
 
 
@@ -73,5 +74,6 @@ echo "<pre>";
 echo "             Turnover: " .  number_format($turn,2) ." <br>";
 echo "</pre>";
 
-mysql_close();
+$mysqli->close();
+
 ?>

@@ -6,12 +6,12 @@ $acnt = "33";    #mortgage interest account ID
 $year = 1;
 
 #get start balance for the account
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" ";$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" ";$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $dt_turn=$row['ammount'];
 
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" ";$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$query="select sum(ammount) as ammount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" ";$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $ct_turn=$row['ammount'];
 
 
@@ -27,20 +27,20 @@ $row = mysql_fetch_array($result);
 $name=$row['name'];
 
 #get start balance for the account
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" and accounted";$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" and accounted";$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $dt_turn=$row['ammount'];
 
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" and accounted";$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$query="select sum(ammount) as ammount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" and accounted";$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $ct_turn=$row['ammount'];
 
 
 $start_saldo=$dt_turn-$ct_turn;
 
 $current_owed = -1 *  $start_saldo;
-$annual_interest = 0.0289;
-$yearly_payment =  26 * 365.00;
+$annual_interest = 0.03;
+$yearly_payment =  27 * 352.12;
 
 
 ?>
@@ -96,9 +96,9 @@ $i=0;
         $i++;
         echo "<td > " . $year . " </td>";
         echo "<td align=\"right\"> " . number_format($current_owed,2) . " </td>";
-        echo "<td align=\"right\">  " . number_format($yearly_payment-$current_owed * $annual_interest,2) . "</td>";
-        echo "<td align=\"right\">  " . number_format($current_owed * $annual_interest,2) . "</td>";
-        echo "<td align=\"right\">  " . number_format($interest_paid,2) . "</td>";
+        echo "<td align=\"right\"> " . number_format($yearly_payment-$current_owed * $annual_interest,2) . "</td>";
+        echo "<td align=\"right\"> " . number_format($current_owed * $annual_interest,2) . "</td>";
+        echo "<td align=\"right\"> " . number_format($interest_paid,2) . "</td>";
 
         $current_owed = (($current_owed * $annual_interest) + $current_owed) - $yearly_payment;
         $interest_paid = $interest_paid + ($current_owed * $annual_interest);

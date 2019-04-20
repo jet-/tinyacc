@@ -23,9 +23,9 @@ require_once("menu.php");
 
 	#ov
 	#type_: L - razhod; A - prihod
-	$result = mysql_query ("select  id, name, type, liquidity, orderby from items ORDER by orderby ");
+	$result = $mysqli->query("select  id, name, type, liquidity, orderby from items ORDER by orderby ");
 	$counter=1;
-	while ($row0 = mysql_fetch_array($result) ) {
+	while ($row0 = $result->fetch_assoc() ) {
 	    $data[$counter][1]= $row0['name'];
 	    $data[$counter][4]= $row0['type'];
 	    $data[$counter][7]= $row0['liquidity'];
@@ -35,7 +35,7 @@ require_once("menu.php");
 	}
 
 
-	$result = mysql_query ("
+	$result = $mysqli->query("
 	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_dt=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
@@ -45,12 +45,12 @@ require_once("menu.php");
 
 
 	$counter=1;
-	while ($row1 = mysql_fetch_array($result) ) {
+	while ($row1 = $result->fetch_assoc() ) {
 	    $data[$counter][2]= $row1['amnt'];
 	    $counter++;
 	}
 
-	$result = mysql_query ("
+	$result = $mysqli->query("
 	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_ct=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
@@ -59,7 +59,7 @@ require_once("menu.php");
 	    ORDER BY orderby ");
 
 	$counter=1;
-	while ($row2 = mysql_fetch_array($result) ) {
+	while ($row2 = $result->fetch_assoc() ) {
 	    $data[$counter][3]= $row2['amnt'];
 	    $counter++;
 	}

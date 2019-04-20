@@ -8,27 +8,26 @@ require_once("menu.php");
 <br><br><br>
 <form name="form" action="<?php echo $PHP_SELF;?>" method="post" enctype="multipart/form-data">
 <fieldset>
-<legend>Report</legend>
+<legend>Report by Groups</legend>
 
     <br> <b> From date</b>: <input type="text" name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10 style="background: #FFFFCC;"> &nbsp;&nbsp;&nbsp;
     <b> To date</b>:  <input type="text"     name="to"      value= "<?php echo date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" >
 	              <input type="checkbox" name="full_ov" value="yes" > Balance for the period &nbsp;&nbsp;
-	              <input type="checkbox" name="show_ledger" value="yes" checked > Show Ledger &nbsp;&nbsp;
+	              <input type="checkbox" name="show_ledger" value="no" checked > Show Ledger &nbsp;&nbsp;
 	              <input type="checkbox" name="show_balance" value="yes" checked> Show Balance &nbsp;&nbsp;
 		      <input type="submit"   name="send"    value="Generate" autofocus >
 <br><br>
 </fieldset>
 </form>
 <?php
-$query ="
+$query = ("
 	  SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, text
 	  FROM items t1, items t2, ledger
 	  WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND ledger.date>=\"". $_POST['from']."\" AND ledger.date<=\"". $_POST['to']."\" 
-	  ORDER BY ledger.date desc,ledger.id desc;";
+	  ORDER BY ledger.date desc,ledger.id desc;");
 
 $result = $mysqli->query($query);
 $rowCount = mysqli_num_rows($result);
-
 
 if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) { 
 
@@ -36,7 +35,7 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 	echo "<caption> GENERAL LEDGER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: {$_POST['from']} to: {$_POST['to']}";
 	echo "&nbsp;&nbsp;&nbsp;&nbsp; $rowCount rows </caption> ";
 	$i=1;
-	if ($result = $mysqli->query($query) ) {
+	if ($result = $mysqli->query($query)) {
 
 	echo "<thead><tr> 
 		<th> # </th> 
@@ -50,7 +49,7 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 		<th width=25 >Last Modified</th> 
 	      </tr></thead>";
 
-	  while($row = $result->fetch_assoc() ) {
+	  while($row = $result->fetch_assoc()) {
 		echo "<tr>";
 		if ($i%2 ==0 ) {
 			 echo '<tr style="background: #eeeeee;" >';
@@ -87,14 +86,14 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	#ov
 	#type_: L - razhod; A - prihod
-	$result = $mysqli->query("SELECT  id, name, type, liquidity, orderby FROM items ORDER by orderby ");
+	$result = $mysqli->query("SELECT  items.id, items.acc_group, acc_groups.name as name, type, liquidity, orderby FROM items, acc_groups Where items.acc_group=acc_groups.acc_group Group by acc_group ORDER by acc_group ");
 	$counter=1;
 	while ($row0 = $result->fetch_assoc() ) {
 	    $data[$counter][1]= $row0['name'];
 	    $data[$counter][4]= $row0['type'];
 	    $data[$counter][7]= $row0['liquidity'];
 	    $data[$counter][8]= $row0['orderby'];
-	    $data[$counter][11]= $row0['id'];
+	    $data[$counter][11]= $row0['acc_group'];
 	    $counter++;
 	}
 
@@ -105,12 +104,12 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	#filling $data[$i][2] credit turnover
 	$result = $mysqli->query("
-	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
+	    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_dt=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
 		      and ledger.date>=\"" . $_POST['from'] . "\" and accounted 
-	    GROUP BY items.id
-	    ORDER BY orderby ");
+	    GROUP BY items.acc_group
+	    ORDER BY acc_group ");
 
 
 	$counter=1;
@@ -123,12 +122,12 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	#filling $data[$i][3] debit turnover
 	$result = $mysqli->query("
-	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
+	    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_ct=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
 		      and ledger.date>=\"" . $_POST['from'] . "\"  and  accounted 
-	    GROUP BY items.id
-	    ORDER BY orderby ");
+	    GROUP BY items.acc_group
+	    ORDER BY acc_group ");
 
 	$counter=1;
 	while ($row2 = $result->fetch_assoc() ) {
@@ -144,8 +143,8 @@ if ($_POST['show_balance'] == "yes" ) {
 	    SELECT  sum(ledger.ammount) AS amnt
 	    FROM items
 	    LEFT JOIN ledger on ledger.item_dt=items.id and YEAR(ledger.date)=\"" . date("Y",strtotime($_POST['to'])) . "\"  and accounted 
-	    GROUP BY items.id
-	    ORDER BY orderby ");
+	    GROUP BY items.acc_group
+	    ORDER BY acc_group ");
 
 	$counter=1;
 	while ($row1 = $result->fetch_assoc() ) {
@@ -159,7 +158,7 @@ if ($_POST['show_balance'] == "yes" ) {
 	      SELECT  sum(ledger.ammount) as amnt
 	      FROM items 
 	      LEFT JOIN  ledger on ledger.item_ct=items.id and YEAR(ledger.date)=\"" . date("Y",strtotime($_POST['to'])) . "\"  and accounted
-	      GROUP BY items.id
+	      GROUP BY items.acc_group
 	      ORDER BY orderby ");
 
 
@@ -255,7 +254,7 @@ if ($_POST['show_balance'] == "yes" ) {
 	echo "  Profit: " 	. number_format($liq,2) 				. "<br></pre>";
 }
 
-$mysqli->close();
+mysql_close();
 ?>
 
 

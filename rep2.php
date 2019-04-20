@@ -2,9 +2,10 @@
 require_once("menu.php");
 require_once("conf.php");
 
-$result = mysql_query ("select  id, name from items ORDER BY orderby");
+
+$result = $mysqli->query("select  id, name from items ORDER BY orderby");
 $counter=1;
-while ($row = mysql_fetch_array($result) ) {
+while ($row = $result->fetch_assoc() ) {
     $data[$counter][1]= $row['id'];
     $data[$counter][2]= $row['name'];
     $counter++;
@@ -26,6 +27,7 @@ while ($row = mysql_fetch_array($result) ) {
         echo ">" . $data[$i][2] . "</option>";
     }
     echo "</select> </td>";
+
 ?>
     &nbsp;&nbsp;&nbsp; 
    <b> From date</b>: 	<input type="text"   name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
@@ -43,14 +45,11 @@ while ($row = mysql_fetch_array($result) ) {
 
 <?php
 
-
-
 $acnt = $_POST['dt1'];
 
-
 $query="select name from items WHERE id=". $acnt ;
-$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $name=$row['name'];
 
 
@@ -61,16 +60,16 @@ $query="
     SELECT sum(ammount) as ammount from ledger 
     WHERE ledger.date<=\"". $_POST['to']."\" and ledger.item_dt=\"" . $acnt . "\" ";
 
-$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $dt_turn=$row['ammount'];
 
 $query="
   SELECT sum(ammount) as ammount from ledger 
   WHERE ledger.date<=\"". $_POST['to']."\" and  ledger.item_ct=\"" . $acnt . "\" ";
 
-$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $ct_turn=$row['ammount'];
 
 
@@ -88,16 +87,16 @@ $query="
   SELECT sum(ammount) as ammount from ledger 
   WHERE ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and ledger.item_dt=\"" . $acnt . "\" ";
 
-$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $dt_turn=$row['ammount'];
 
 $query="
   SELECT sum(ammount) as ammount from ledger 
   WHERE ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and  ledger.item_ct=\"" . $acnt . "\" ";
 
-$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $ct_turn=$row['ammount'];
 
 
@@ -108,8 +107,8 @@ $query = "
   WHERE t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and (ledger.item_dt=\"" . $acnt . "\" or ledger.item_ct=\"" . $acnt . "\") 
   ORDER BY ledger.date desc,ledger.id desc;";
 
-$result = mysql_query ($query);
-$rowCount = mysql_num_rows($result);
+$result = $mysqli->query($query);
+$rowCount = mysqli_num_rows($result);
 
 
 if ($_POST['table'] == "yes" and $rowCount > 0 ){ 
@@ -117,7 +116,7 @@ if ($_POST['table'] == "yes" and $rowCount > 0 ){
 	echo "<caption> STATEMENT OF ACCOUNT:  $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: " . $_POST['from'] . " to: " . $_POST['to'] . "&nbsp;&nbsp;&nbsp;&nbsp; $rowCount rows </caption> ";
 
 $i=1;
-if ($row = mysql_fetch_array($result)) {
+if ($result = $mysqli->query($query) ) {
    echo "<thead><tr align=\"center\"> 
 	<th> # </th> 
 	<th>Item DT</th>  
@@ -131,7 +130,7 @@ if ($row = mysql_fetch_array($result)) {
 	<th>Balance</th> 
       </tr></thead>";
 
-   do {
+  while ($row = $result->fetch_assoc() ) {
         if ($i%2 ==0 ) {
                  echo "<tr style=\"background: #eeeeee;\" >";
           } else {
@@ -162,7 +161,7 @@ if ($row = mysql_fetch_array($result)) {
         }
 	 echo "</tr>";
 	
-} while($row = mysql_fetch_array($result));
+} 
 
 } else { echo " <hr> no records found! <hr> ";}
 
@@ -190,8 +189,8 @@ var data = google.visualization.arrayToDataTable([
 $i=1;
 
 
-$result = mysql_query ($query);
-if ($row = mysql_fetch_array($result)) {
+$result = $mysqli->query($query);
+if ($row = $result->fetch_assoc() ) {
    do {
         $i++;
 	echo  "['" . $row['date'] . "',";
@@ -206,7 +205,7 @@ if ($row = mysql_fetch_array($result)) {
 		echo $start_saldo1 . "],";
 	}
 
-    } while($row = mysql_fetch_array($result));
+    } while($row = $result->fetch_assoc());
 
 } else { echo " <hr> no records found! <hr> ";}
 ?>
