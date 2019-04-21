@@ -95,7 +95,7 @@ if (isset($_GET['order']) ) {
 } else {
     $query= "INSERT INTO ";
 }
-$query.=" ledger set item_dt=" . $_POST['dt1'] . ", ammount=\"" . $_POST['amnt1'] . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\" ,text=\"" . mysql_real_escape_string($_POST['note']) . "\"  ";
+$query.=" ledger set item_dt=" . $_POST['dt1'] . ", ammount=\"" . $_POST['amnt1'] . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\" ,text=\"" . mysqli_real_escape_string($mysqli,$_POST['note']) . "\"  ";
 if (!isset($_GET['order']) ) {
     $query .= " , created=\"". date('Y-m-d H:i:s') . "\" " ;
 }
@@ -113,6 +113,7 @@ echo "<br> Accounted! <br>";
 echo "New record has id: " . mysqli_insert_id($mysqli); 
 
 }
+
 $mysqli->close();
 ?>
 
