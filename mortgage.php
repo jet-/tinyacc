@@ -22,8 +22,8 @@ $acnt = "29";    #mortgage principal account ID
 $year = 1;
 
 $query="select name from items WHERE id=0". $acnt ;
-$result = mysql_query ($query);
-$row = mysql_fetch_array($result);
+$result = $mysqli->query($query);
+$row = $result->fetch_assoc();
 $name=$row['name'];
 
 #get start balance for the account
