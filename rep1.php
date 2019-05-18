@@ -184,10 +184,10 @@ if ($_POST['show_balance'] == "yes" ) {
 	echo "</caption>   
 			<tr>   
 				<th> Item </th>  
-				<th> Ammount DT </th>  
-				<th> Ammount CT </th> 
-				<th> Ammount DT<br> annual </th>
-				<th> Ammount CT <br>annual </th>
+				<th> Debit Turnover </th>  
+				<th> Credit Turnover </th> 
+				<th> Debit Turnover <br> annual </th>
+				<th> Credit Turnover <br>annual </th>
 				<th> Ammount </th>   
 				<th>liab.</th>  
 				<th>asset</th>   
