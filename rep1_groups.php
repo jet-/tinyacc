@@ -85,22 +85,22 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 			 echo '<tr style="background: #cccccc;" >';
 		}
 		$i++;
-		 echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] ."\">". $row['id'] .		"</a></td>";
-		 echo "<td width=\"140\"> " . $row['name_dt'] .	" </td>";
-		 echo "<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . " </td>";
-		 echo "<td width=\"140\"> " . $row['name_ct'] .	" </td>";
-		 echo "<td width=\"100\" align=\"center\"> " . $row['date'] . " </td>";
-		 echo "<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . " </td>";
-		 echo "<td width=\"10\" align=\"center\"> "; 				
+		echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] ."\">". $row['id'] . "</a></td>
+			<td width=\"140\"> " . $row['name_dt'] . " </td>
+		 	<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . "</td>
+		 	<td width=\"140\"> " . $row['name_ct'] .	"</td>
+		 	<td width=\"100\" align=\"center\"> " . $row['date'] . "</td>
+		 	<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . "</td>
+		 	<td width=\"10\" align=\"center\"> "; 				
 		 	if  ($row['accounted'] == "1") {
 		 		echo '<img src="images/checkmark.png" width="23" height="23" alt="" />';
 		 		} else {
 				echo '<img src="images/red-x.png" width="20" height="20" alt="" />';
 		 		}
-		 echo 		" </td>";         
-		 echo "<td align=\"center\"> <h6>" . $row['created'] . " </h6></td>";
-		 echo "<td align=\"center\"> <h6>" . $row['time']    . " </h6></td>";
-		 echo "</tr>";
+		 echo 		" </td>
+		 	<td align=\"center\"> <h6>" . $row['created'] . "</h6></td>
+		 	<td align=\"center\"> <h6>" . $row['time']    . "</h6></td>
+		 	</tr>";
 	  } 
 
 	} else { echo " <hr> no records found! <hr> ";}
@@ -116,12 +116,9 @@ if ($_POST['show_balance'] == "yes" ) {
 	  $_POST['from']="2000-01-01";
 	}
 
-
-
 	echo "<table  class=\"ref\"  bgcolor=\"#DDD4FF\">";
 	echo "<caption> BALANCE SHEET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from: ". $_POST['from'] . "&nbsp;&nbsp; to: ". $_POST['to'];
-	echo "</caption>   
-			";
+	echo "</caption>";
 
 	echo '<tr>
 		<th width="219"> Item </th>
@@ -195,7 +192,7 @@ if ($_POST['show_balance'] == "yes" ) {
 	    $row = $result1->fetch_assoc()  ;
 	    $group_ct_turn_y = $row['amnt'];
 
-	    if ( $group_dt_turn <> 0 or $group_ct_turn <>0 ) {
+	    if ( $group_dt_turn <> 0 or $group_ct_turn <>0 ) {		#hide rows with zeros
 	    echo "<button class=\"collapsible\">
 		<table   class=\"ref\"  bgcolor=\"#cae6ff\">
 		<tr>
@@ -275,14 +272,14 @@ if ($_POST['show_balance'] == "yes" ) {
 		    $row = $result2->fetch_assoc()  ;
 		    $acc_ct_turn_y = $row['amnt'];
 
-
-		    echo "<tr><td  width=\"200\"> $acc_name </td>
-			<td align=\"right\" width=\"80\">" . number_format($acc_dt_turn,2) . "</td>
-			<td align=\"right\" width=\"80\">" . number_format($acc_ct_turn,2) . "</td>
-			<td align=\"right\" width=\"80\">" . number_format($acc_dt_turn_y,2) . "</td>
-			<td align=\"right\" width=\"80\">" . number_format($acc_ct_turn_y,2) . "</td>
-			<td align=\"right\"  style=\"background: #eeeeee;\"  width=\"80\">" . number_format($acc_ct_turn - $acc_dt_turn,2) . "</td> </tr>";
-		    
+		    if ( $acc_dt_turn <> 0 or $acc_ct_turn <> 0 ) {	#hide rows with zeros
+			  echo "<tr><td width=\"200\"> $acc_name </td>
+				<td align=\"right\" width=\"80\">" . number_format($acc_dt_turn,2) . "</td>
+				<td align=\"right\" width=\"80\">" . number_format($acc_ct_turn,2) . "</td>
+				<td align=\"right\" width=\"80\">" . number_format($acc_dt_turn_y,2) . "</td>
+				<td align=\"right\" width=\"80\">" . number_format($acc_ct_turn_y,2) . "</td>
+				<td align=\"right\" style=\"background: #eeeeee;\"  width=\"80\">" . number_format($acc_ct_turn - $acc_dt_turn,2) . "</td></tr>";
+		    }		    
 		}
 
 		echo "</table>
