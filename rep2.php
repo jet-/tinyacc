@@ -3,6 +3,7 @@ require_once("menu.php");
 require_once("conf.php");
 
 
+# fill the droplist list
 $result = $mysqli->query("select  id, name from items ORDER BY orderby");
 $counter=1;
 while ($row = $result->fetch_assoc() ) {
@@ -30,13 +31,15 @@ while ($row = $result->fetch_assoc() ) {
 
 ?>
     &nbsp;&nbsp;&nbsp; 
-   <b> From date</b>: 	<input type="text"   name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
-   <b> To date</b>:     <input type="text"   name="to"   value= "<?php echo date("Y-m-d"); ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
-	                <input type="checkbox" name="table" value="yes" checked> Table &nbsp;&nbsp;
-	                <input type="checkbox" name="graph" value="yes" > Chart &nbsp;&nbsp;
-	                <input type="checkbox" name="rel" value="yes" > Relative &nbsp;&nbsp;
-	                <input type="checkbox" name="diff" value="yes" > Differential &nbsp;&nbsp;
-		        <input type="submit" name="send" value="Generate" autofocus>
+   <b> From date</b>: 
+	<input type="text"   name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
+   <b> To date</b>: 
+	<input type="text"   name="to"  value= "<?php echo date("Y-m-d"); ?>" size=10 maxlength=10 style="background: #FFFFCC;" >
+	<input type="checkbox" name="table" value="yes" checked> Table &nbsp;&nbsp;
+	<input type="checkbox" name="graph" value="yes" > Chart &nbsp;&nbsp;
+	<input type="checkbox" name="rel"   value="yes" > Relative &nbsp;&nbsp;
+	<input type="checkbox" name="diff"  value="yes" > Differential &nbsp;&nbsp;
+	<input type="submit"   name="send"  value="Generate" autofocus>
 <br><br>
 
 </fieldset>
@@ -51,8 +54,6 @@ $query="select name from items WHERE id=". $acnt ;
 $result = $mysqli->query($query);
 $row = $result->fetch_assoc();
 $name=$row['name'];
-
-
 
 
 #get start ballance for the account
@@ -104,16 +105,24 @@ $ct_turn=$row['ammount'];
 $query = "
   SELECT ledger.id as id,  t1.name as name_dt, ledger.ammount, t2.name as name_ct, date, time, created, accounted, text, ledger.item_dt as item_dt
   FROM items t1, items t2, ledger 
-  WHERE t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and (ledger.item_dt=\"" . $acnt . "\" or ledger.item_ct=\"" . $acnt . "\") 
-  ORDER BY ledger.date desc,ledger.id desc;";
+  WHERE     t1.id=ledger.item_dt 
+	and t2.id=ledger.item_ct 
+	and ledger.date>=\"". $_POST['from']."\" 
+	and ledger.date<=\"". $_POST['to']."\" 
+	and (ledger.item_dt=\"" . $acnt . "\" 
+	 or ledger.item_ct=\"" . $acnt . "\") 
+  ORDER BY 
+	ledger.date desc,ledger.id desc;";
 
 $result = $mysqli->query($query);
 $rowCount = mysqli_num_rows($result);
 
 
 if ($_POST['table'] == "yes" and $rowCount > 0 ){ 
-	echo '<table class="table table-bordered tablesorter">  ';
-	echo "<caption> STATEMENT OF ACCOUNT:  $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: " . $_POST['from'] . " to: " . $_POST['to'] . "&nbsp;&nbsp;&nbsp;&nbsp; $rowCount rows </caption> ";
+	echo "<table class=\"table table-bordered tablesorter\"> 
+		<caption> 
+			STATEMENT OF ACCOUNT:  $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: " . $_POST['from'] . " to: " . $_POST['to'] . "&nbsp;&nbsp;&nbsp;&nbsp; $rowCount rows 
+		</caption> ";
 
 $i=1;
 if ($result = $mysqli->query($query) ) {
@@ -137,40 +146,40 @@ if ($result = $mysqli->query($query) ) {
                  echo "<tr style=\"background: #cccccc;\" >";
         }
         $i++;
-	 echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] .  "&curr=" .   $_GET['curr'] . "\">". $row['id'] ." </a></td>";
-	 echo "<td width=\"120\"> " . $row['name_dt'] . " </td>";
-	 echo "<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . " </td>";
-	 echo "<td width=\"120\"> " . $row['name_ct'] . " </td>";
-	 echo "<td width=\"100\" align=\"center\"> " . $row['date'] . " </td>";
-	 echo "<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . " </td>";
-	 echo "<td width=\"10\" align=\"center\"> "; 				
+	 echo  "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] . "\">". $row['id'] ."</a></td>
+	 	<td width=\"120\"> " . $row['name_dt'] . "</td>
+		<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . "</td>
+		<td width=\"120\"> " . $row['name_ct'] . "</td>
+		<td width=\"100\" align=\"center\"> " . $row['date'] . "</td>
+		<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . "</td>
+		<td width=\"10\" align=\"center\"> "; 				
 	 	if  ($row['accounted'] == "1") {
 	 		echo '<img src="images/checkmark.png" width="23" height="23" alt="" />';
 	 		} else {
 			echo '<img src="images/red-x.png" width="20" height="20" alt="" />';
 	 		}
-	 echo 		" </td>";         
-	 echo "<td align=\"center\"> <h6>" . $row['created'] . " </h6></td>";
-	 echo "<td align=\"center\"> <h6>" . $row['time'] . " </h6></td>";
+	 echo 		" </td>
+		<td align=\"center\"> <h6>" . $row['created'] . "</h6></td>
+		<td align=\"center\"> <h6>" . $row['time']    . "</h6></td>";
 
 	 echo "<td align=\"right\"> <h6>" . number_format($start_saldo,2) .  " </h6></td>";
-        if ( $acnt ==  $row['item_dt'] ) {
+         if ( $acnt ==  $row['item_dt'] ) {
             $start_saldo = $start_saldo - $row['ammount'];
-        } else {
+         } else {
             $start_saldo = $start_saldo + $row['ammount'];
-        }
+         }
 	 echo "</tr>";
 	
 } 
 
 } else { echo " <hr> no records found! <hr> ";}
 
-echo "</table>";
-echo "<pre>";
-echo "Turnover DT: " .  number_format($dt_turn,2) ." <br>";
-echo "Turnover CT: " .  number_format($ct_turn,2) ." <br>";
-echo "    Ammount: " .  number_format($dt_turn - $ct_turn,2) . "<br>";
-echo "</pre>";
+echo "</table>
+	<pre>
+Turnover DT: " .  number_format($dt_turn,2) ."
+Turnover CT: " .  number_format($ct_turn,2) ."
+    Ammount: " .  number_format($dt_turn - $ct_turn,2) . "
+</pre>";
 }
 
 ?>

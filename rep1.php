@@ -20,25 +20,28 @@ require_once("menu.php");
 </fieldset>
 </form>
 <?php
-$query ="
-	  SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, text
-	  FROM items t1, items t2, ledger
-	  WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND ledger.date>=\"". $_POST['from']."\" AND ledger.date<=\"". $_POST['to']."\" 
-	  ORDER BY ledger.date desc,ledger.id desc;";
+	$query ="
+	  SELECT 
+		ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, text
+	  FROM 
+		items t1, items t2, ledger
+	  WHERE 
+		t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND ledger.date>=\"". $_POST['from']."\" AND ledger.date<=\"". $_POST['to']."\" 
+	  ORDER BY 
+		ledger.date desc,ledger.id desc;";
 
-$result = $mysqli->query($query);
-$rowCount = mysqli_num_rows($result);
+	$result = $mysqli->query($query);
+	$rowCount = mysqli_num_rows($result);
 
 
-if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) { 
+       if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) { 
+	  echo "<table class=\"table table-bordered tablesorter\">
+		<caption> GENERAL LEDGER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: {$_POST['from']} to: {$_POST['to']}
+		&nbsp;&nbsp;&nbsp;&nbsp; $rowCount rows </caption> ";
+	  $i=1;
+	  if ($result = $mysqli->query($query) ) {
 
-	echo '<table class="table table-bordered tablesorter">  ';
-	echo "<caption> GENERAL LEDGER &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;from: {$_POST['from']} to: {$_POST['to']}";
-	echo "&nbsp;&nbsp;&nbsp;&nbsp; $rowCount rows </caption> ";
-	$i=1;
-	if ($result = $mysqli->query($query) ) {
-
-	echo "<thead><tr> 
+	  echo "<thead><tr> 
 		<th> # </th> 
 		<th>Item DT</th>  
 		<th> Ammount </th> 
@@ -58,33 +61,32 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 			 echo '<tr style="background: #cccccc;" >';
 		}
 		$i++;
-		 echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] ."\">". $row['id'] .		"</a></td>";
-		 echo "<td width=\"140\"> " . $row['name_dt'] .	" </td>";
-		 echo "<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . " </td>";
-		 echo "<td width=\"140\"> " . $row['name_ct'] .	" </td>";
-		 echo "<td width=\"100\" align=\"center\"> " . $row['date'] . " </td>";
-		 echo "<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . " </td>";
-		 echo "<td width=\"10\" align=\"center\"> "; 				
+		echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] ."\">". $row['id'] .		"</a></td>
+		 	<td width=\"140\">" . $row['name_dt'] . "</td>
+		 	<td width=\"70\" align=\"right\">" . number_format($row['ammount'],2) . "</td>
+		 	<td width=\"140\">" . $row['name_ct'] . "</td>
+		 	<td width=\"100\" align=\"center\">" . $row['date'] . "</td>
+		 	<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . "</td>
+		 	<td width=\"10\" align=\"center\">"; 				
 		 	if  ($row['accounted'] == "1") {
 		 		echo '<img src="images/checkmark.png" width="23" height="23" alt="" />';
 		 		} else {
 				echo '<img src="images/red-x.png" width="20" height="20" alt="" />';
 		 		}
-		 echo 		" </td>";         
-		 echo "<td align=\"center\"> <h6>" . $row['created'] . " </h6></td>";
-		 echo "<td align=\"center\"> <h6>" . $row['time']    . " </h6></td>";
-		 echo "</tr>";
+		echo 		" </td>
+		  <td align=\"center\"> <h6>" . $row['created'] . " </h6></td>
+		  <td align=\"center\"> <h6>" . $row['time']    . " </h6></td>
+		  </tr>";
 	  } 
 
 	} else { echo " <hr> no records found! <hr> ";}
 
-	echo "</table>";
-	echo "<br><br>";
+	echo "</table>
+		<br><br>";
 }
 
 
 if ($_POST['show_balance'] == "yes" ) { 
-
 	#ov
 	#type_: L - razhod; A - prihod
 	$result = $mysqli->query("SELECT  id, name, type, liquidity, orderby FROM items ORDER by orderby ");
@@ -112,14 +114,11 @@ if ($_POST['show_balance'] == "yes" ) {
 	    GROUP BY items.id
 	    ORDER BY orderby ");
 
-
 	$counter=1;
 	while ($row1 = $result->fetch_assoc() ) {
 	    $data[$counter][2]= $row1['amnt'];
 	    $counter++;
 	}
-
-
 
 	#filling $data[$i][3] debit turnover
 	$result = $mysqli->query("
@@ -135,9 +134,6 @@ if ($_POST['show_balance'] == "yes" ) {
 	    $data[$counter][3]= $row2['amnt'];
 	    $counter++;
 	}
-
-
-
 
 	#filling $data[$i][5] yearly debit turnover
 	$result = $mysqli->query("
@@ -179,9 +175,10 @@ if ($_POST['show_balance'] == "yes" ) {
 	#	 [8] - orderby
 	#	[11] - account id
 
-	echo "<table  class=\"ref\"  bgcolor=\"#DDD4FF\">";
-	echo "<caption> BALANCE SHEET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from: ". $_POST['from'] . "&nbsp;&nbsp; to: ". $_POST['to'];
-	echo "</caption>   
+	echo "<table  class=\"ref\"  bgcolor=\"#DDD4FF\">
+		<caption> 
+			BALANCE SHEET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; from: ". $_POST['from'] . "&nbsp;&nbsp; to: ". $_POST['to'] . "
+		</caption>
 			<tr>   
 				<th> Item </th>  
 				<th> Debit Turnover </th>  
@@ -211,29 +208,29 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	for ($i=1;$i<$counter;$i++) {
 	    if ($data[$i][2] <> 0 or $data[$i][3] <> 0) {
-		echo "<tr>";
-		  echo "<td> <a href=\"rep2.php?account=" . number_format($data[$i][11],0) . "&curr=" .   $_GET['curr'] . "\">". $data[$i][1] . " </a></td>";
-		  echo "<td align=\"right\">" . number_format($data[$i][2],2) . "</td>";
-		  echo "<td align=\"right\">" . number_format($data[$i][3],2) .	"</td>";
-		  echo "<td align=\"right\">" . number_format($data[$i][5],2) .	"</td>";
-		  echo "<td align=\"right\">" . number_format($data[$i][6],2) .	"</td>";
-		  echo "<td align=\"right\"  style=\"background: #eeeeee;\" >" . number_format($data[$i][3] - $data[$i][2],2) . " </td> ";
+		echo "<tr>
+			<td> <a href=\"rep2.php?account=" . number_format($data[$i][11],0) . "&curr=" . $_GET['curr'] . "\">". $data[$i][1] . " </a></td>
+		  	<td align=\"right\">" . number_format($data[$i][2],2) . "</td>
+		  	<td align=\"right\">" . number_format($data[$i][3],2) .	"</td>
+		  	<td align=\"right\">" . number_format($data[$i][5],2) .	"</td>
+		  	<td align=\"right\">" . number_format($data[$i][6],2) .	"</td>
+		  	<td align=\"right\" style=\"background: #eeeeee;\" >" . number_format($data[$i][3] - $data[$i][2],2) . "</td> ";
 
 		if ($data[$i][4] == "L" ) { 
-		  echo "<td align=\"right\">" .  number_format(-100 * $data[$i][2]/$razhod,0) . "%</td>";
-		  echo "<td align=\"center\"> - </td>";
+		  echo "<td align=\"right\">" .  number_format(-100 * $data[$i][2]/$razhod,0) . "%</td>
+		  	<td align=\"center\"> - </td>";
 		}
 
 		if ($data[$i][4] == "A" ) { 
-		  echo "<td align=\"center\"> - </td>";
-		  echo "<td align=\"right\">" .  number_format(100 * $data[$i][3]/$prihod,0 ) . "%</td>";
+		  echo "<td align=\"center\"> - </td>
+		  	<td align=\"right\">" .  number_format(100 * $data[$i][3]/$prihod,0 ) . "%</td>";
 		}
 		if ($data[$i][4] == "" ) { 
-		  echo "<td align=\"center\"> - </td>";
-		  echo "<td align=\"center\"> - </td>";
+		  echo "<td align=\"center\"> - </td>
+		  	<td align=\"center\"> - </td>";
 		}
-	 	  echo "<td align=\"center\"  style=\"border:0px solid black\"> " .  ($data[$i][7] ) . " </td>";
-		  echo "<td align=\"center\"  style=\"border:0px solid black\"> " .  ($data[$i][4] ) . " </td>";
+	 	  echo "<td align=\"center\" style=\"border:0px solid black\">" .  ($data[$i][7] ) . "</td>
+		 	<td align=\"center\" style=\"border:0px solid black\">" .  ($data[$i][4] ) . "</td>";
 	       echo "</tr>";
 	    }
 		if ($data[$i][7] == "-" ) { 
@@ -245,14 +242,13 @@ if ($_POST['show_balance'] == "yes" ) {
 		}
 	}
 
-	echo "</table>";
+	echo "</table>
+		<br><pre>
+	 Revenue:  "   	. number_format($prihod,2) . "
+	Expenses: "  	. number_format($razhod,2) . "
+	  Equity:  "  	. number_format($prihod + $razhod,2) . "
 
-	echo "<br> <pre>";
-	echo " Revenue:  " 	. number_format($prihod,2) 				. "<br>";
-	echo "Expenses: " 	. number_format($razhod,2) 				. "<br>";
-	echo "  Equity: " 	. number_format($prihod + $razhod,2) 			. "<br>";
-	echo "<hr>";
-	echo "  Profit: " 	. number_format($liq,2) 				. "<br></pre>";
+	  Profit:   " 	. number_format($liq,2) . "</pre>";
 }
 
 $mysqli->close();

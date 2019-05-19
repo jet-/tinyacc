@@ -110,6 +110,10 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 }
 
 
+#to test
+#select item_ct, ammount, items.name, items.acc_group, sum(ammount)  from ledger left join items on ledger.item_ct=items.id  group by acc_group, item_ct with rollup;
+#select item_dt, ammount, items.name, items.acc_group, sum(ammount)  from ledger left join items on ledger.item_dt=items.id  group by acc_group, item_dt with rollup;
+
 if ($_POST['show_balance'] == "yes" ) { 
 
 	if ($_POST['full_ov'] <> "yes" ) { 

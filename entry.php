@@ -2,7 +2,7 @@
 require_once("menu.php");
 require_once("conf.php");
 
-
+# fill in drop list
 $result = $mysqli->query("select  id, name from items ORDER BY orderby");
 $counter=1;
 while ($row = $result->fetch_assoc() ) {
@@ -10,6 +10,7 @@ while ($row = $result->fetch_assoc() ) {
     $data[$counter][2]= $row['name'];
     $counter++;
 }
+
 if (!isset($_POST['send']) ) {
     if (isset($_GET['order']) ) {
 	$query="SELECT date, item_dt, ammount, item_ct, accounted, text FROM ledger WHERE id=" . $_GET['order'];
@@ -23,7 +24,6 @@ if (!isset($_POST['send']) ) {
 
 <fieldset>
 <legend>Add New Document</legend>
-
 
 
 <table> 
@@ -95,15 +95,19 @@ if (isset($_GET['order']) ) {
 } else {
     $query= "INSERT INTO ";
 }
+
 $query.=" ledger set item_dt=" . $_POST['dt1'] . ", ammount=\"" . $_POST['amnt1'] . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\" ,text=\"" . mysqli_real_escape_string($mysqli,$_POST['note']) . "\"  ";
+
 if (!isset($_GET['order']) ) {
     $query .= " , created=\"". date('Y-m-d H:i:s') . "\" " ;
 }
+
 if ($_POST['accounted1'] == "yes" ) {
     $query .= " , accounted=true ";
 } else {
     $query .= " , accounted=false ";
 }
+
 if (isset($_GET['order']) ) {
     $query .= " WHERE id=" . $_GET['order'];
 }
