@@ -81,24 +81,26 @@ echo "<table class=\"ref\"  bgcolor=\"#DDD4FF\">
     <th>October</th> 
     <th>November</th> 
     <th>December</th>
+    <th>Total for the Month</th>
 </tr>";
 
 
 echo "<caption> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </caption>"; 
 
-    $d ="";
+	$d ="";
+	$sum=0;
 	if ($row = $result->fetch_assoc() ) {
 
 	while($row = $result->fetch_assoc() ) {
             if ($d <> $row['date']) 
                 {
                     $d = $row['date'];
-                    echo "</tr> <tr> <td> <b>"  . $row['date'] . "</b></td>";
+                    echo "<td align=\"right\">" . number_format($sum,2) . "</td></tr> <tr> <td> <b>"  . $row['date'] . "</b></td>"; $sum=0;
                 }    
-                echo "<td align='right'>" . number_format($row['amnt'],0) . "</td>" ; 
+                echo "<td align='right'>" . number_format($row['amnt'],0) . "</td>" ; $sum = $sum + $row['amnt'];
                
-	       } 
 
+	       }  
 	} else { echo " <hr> no records found! <hr> ";}
 
 echo "</table>";
