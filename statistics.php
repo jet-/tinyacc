@@ -95,7 +95,7 @@ echo "<caption> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </caption>";
             if ($d <> $row['date']) 
                 {
                     $d = $row['date'];
-                    echo "<td align=\"right\">" . number_format($sum,2) . "</td></tr> <tr> <td> <b>"  . $row['date'] . "</b></td>"; $sum=0;
+                    echo "<td align=\"right\"><b>" . number_format($sum,2) . "</b></td></tr> <tr> <td> <b>"  . $row['date'] . "</b></td>"; $sum=0;
                 }    
                 echo "<td align='right'>" . number_format($row['amnt'],0) . "</td>" ; $sum = $sum + $row['amnt'];
                
