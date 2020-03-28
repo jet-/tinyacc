@@ -40,7 +40,7 @@ $start_saldo=$dt_turn-$ct_turn;
 
 $current_owed = -1 *  $start_saldo;
 $annual_interest = 0.03;
-$yearly_payment =  27 * 352.12;
+$yearly_payment =  26 * 352.12;
 
 
 ?>
@@ -85,7 +85,14 @@ print "<br>";
 
 <?php
 $i=0;
-   echo "<tr align=\"center\"> <th> Year </th> <th>Owed ammount</th>  <th>  Yearly Principal </th> <th> Yearly Interest</th>   <th> &nbsp;&nbsp; Total Paid Interest</th> </tr>";
+   echo "<tr align=\"center\"> 
+	<th> Year #</th> 
+	<th> Year </th> 
+	<th>Owed ammount</th>  
+	<th>  Yearly Principal </th> 
+	<th> Yearly Interest</th>   
+	<th> &nbsp;&nbsp; Total Paid Interest</th> 
+	</tr>";
 
    while ( $current_owed > 0 ) {
         if ($i%2 ==0 ) {
@@ -95,6 +102,7 @@ $i=0;
         }
         $i++;
         echo "<td > " . $year . " </td>";
+        echo "<td > " , date("Y") + $year, " </td>";
         echo "<td align=\"right\"> " . number_format($current_owed,2) . " </td>";
         echo "<td align=\"right\"> " . number_format($yearly_payment-$current_owed * $annual_interest,2) . "</td>";
         echo "<td align=\"right\"> " . number_format($current_owed * $annual_interest,2) . "</td>";
@@ -109,7 +117,7 @@ $i=0;
 
 } 
 
-print  "<tr> <td> Total </td> <td> (principal + interest) : " . number_format($total_paid + $interest_paid,2) . " </td> </tr>";
+print  "<tr> <td>  Total </td> <td> principal +</td> <td>interest: " . number_format($total_paid + $interest_paid,2) . " </td> </tr>";
 echo "</table>";
 
 mysql_close();
