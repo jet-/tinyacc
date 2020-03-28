@@ -81,7 +81,7 @@ echo "<table class=\"ref\"  bgcolor=\"#DDD4FF\">
     <th>October</th> 
     <th>November</th> 
     <th>December</th>
-    <th>Total for the Month</th>
+    <th>Total for the Year</th>
 </tr>";
 
 
