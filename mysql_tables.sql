@@ -24,7 +24,7 @@ UNLOCK TABLES;
 CREATE TABLE `ledger` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `item_dt` int(10) unsigned DEFAULT NULL,
-  `ammount` decimal(16,2) DEFAULT NULL,
+  `amount` decimal(16,2) DEFAULT NULL,
   `item_ct` int(10) unsigned DEFAULT NULL,
   `operator` int(10) unsigned DEFAULT NULL,
   `date` date DEFAULT NULL,

@@ -6,13 +6,13 @@ $acnt = "33";    #mortgage interest account ID
 $year = 1;
 
 #get start balance for the account
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" ";$result = $mysqli->query($query);
+$query="select sum(amount) as amount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" ";$result = $mysqli->query($query);
 $row = $result->fetch_assoc();
-$dt_turn=$row['ammount'];
+$dt_turn=$row['amount'];
 
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" ";$result = $mysqli->query($query);
+$query="select sum(amount) as amount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" ";$result = $mysqli->query($query);
 $row = $result->fetch_assoc();
-$ct_turn=$row['ammount'];
+$ct_turn=$row['amount'];
 
 
 $interest_paid=$dt_turn-$ct_turn;
@@ -27,13 +27,13 @@ $row = $result->fetch_assoc();
 $name=$row['name'];
 
 #get start balance for the account
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" and accounted";$result = $mysqli->query($query);
+$query="select sum(amount) as amount from ledger WHERE ledger.item_dt=\"" . $acnt . "\" and accounted";$result = $mysqli->query($query);
 $row = $result->fetch_assoc();
-$dt_turn=$row['ammount'];
+$dt_turn=$row['amount'];
 
-$query="select sum(ammount) as ammount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" and accounted";$result = $mysqli->query($query);
+$query="select sum(amount) as amount from ledger WHERE ledger.item_ct=\"" . $acnt . "\" and accounted";$result = $mysqli->query($query);
 $row = $result->fetch_assoc();
-$ct_turn=$row['ammount'];
+$ct_turn=$row['amount'];
 
 
 $start_saldo=$dt_turn-$ct_turn;
@@ -49,7 +49,7 @@ $yearly_payment =  26 * 352.12;
 <fieldset>
 <legend>Projected Mortgage Report</legend>
     &nbsp;&nbsp;&nbsp;&nbsp; <br>
-   <b> Current Ammount</b>: 	<input type="text" name="current_owed"    value= "<?php echo $current_owed; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
+   <b> Current amount</b>: 	<input type="text" name="current_owed"    value= "<?php echo $current_owed; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
    <b> Yearly payment </b>: 	<input type="text" name="yearly_payment"  value= "<?php echo $yearly_payment; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
    <b> Annual Interest</b>:     <input type="text" name="annual_interest" value= "<?php echo $annual_interest; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp;
    <b> Interest Paid </b>:      <input type="text" name="interest_paid"    value= "<?php echo $interest_paid; ?>" size=10 maxlength=10  style="background: #FFFFCC;" >
@@ -69,7 +69,7 @@ $interest_paid = $_POST['interest_paid'];
 $total_paid = $current_owed;
 
 
-print "<p><br><b>Current Ammount: </b>" . number_format($current_owed,2);
+print "<p><br><b>Current amount: </b>" . number_format($current_owed,2);
 print "<br>&nbsp;&nbsp;&nbsp;&nbsp;";
 print "<p><b>Yearly Payment: </b>" . number_format($yearly_payment,2);
 print "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -88,7 +88,7 @@ $i=0;
    echo "<tr align=\"center\"> 
 	<th> Year #</th> 
 	<th> Year </th> 
-	<th>Owed ammount</th>  
+	<th>Owed amount</th>  
 	<th>  Yearly Principal </th> 
 	<th> Yearly Interest</th>   
 	<th> &nbsp;&nbsp; Total Paid Interest</th> 

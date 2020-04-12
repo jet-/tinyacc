@@ -48,7 +48,7 @@ require_once("menu.php");
 </form>
 <?php
 $query ="
-	  SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, text
+	  SELECT ledger.id AS id,  t1.name AS name_dt, ledger.amount, t2.name AS name_ct, date, time, created, accounted, text
 	  FROM items t1, items t2, ledger
 	  WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND ledger.date>=\"". $_POST['from']."\" AND ledger.date<=\"". $_POST['to']."\" 
 	  ORDER BY ledger.date desc,ledger.id desc;";
@@ -68,7 +68,7 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 	echo "<thead><tr> 
 		<th> # </th> 
 		<th>Item DT</th>  
-		<th> Ammount </th> 
+		<th> Amount </th> 
 		<th>Item CT</th> 
 		<th> Date </th> 
 		<th width=500>Text</th>  
@@ -87,7 +87,7 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 		$i++;
 		echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] ."\">". $row['id'] . "</a></td>
 			<td width=\"140\"> " . $row['name_dt'] . " </td>
-		 	<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . "</td>
+		 	<td width=\"70\" align=\"right\"> " . number_format($row['amount'],2) . "</td>
 		 	<td width=\"140\"> " . $row['name_ct'] .	"</td>
 		 	<td width=\"100\" align=\"center\"> " . $row['date'] . "</td>
 		 	<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . "</td>
@@ -111,8 +111,8 @@ if ($_POST['show_ledger'] == "yes" and $rowCount > 0 ) {
 
 
 #to test
-#select item_ct, ammount, items.name, items.acc_group, sum(ammount)  from ledger left join items on ledger.item_ct=items.id  group by acc_group, item_ct with rollup;
-#select item_dt, ammount, items.name, items.acc_group, sum(ammount)  from ledger left join items on ledger.item_dt=items.id  group by acc_group, item_dt with rollup;
+#select item_ct, amount, items.name, items.acc_group, sum(amount)  from ledger left join items on ledger.item_ct=items.id  group by acc_group, item_ct with rollup;
+#select item_dt, amount, items.name, items.acc_group, sum(amount)  from ledger left join items on ledger.item_dt=items.id  group by acc_group, item_dt with rollup;
 
 if ($_POST['show_balance'] == "yes" ) { 
 
@@ -126,11 +126,11 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	echo '<tr>
 		<th width="219"> Item </th>
-		<th width="80">Ammount DT</th>
-		<th width="81">Ammount CT</th>
-		<th width="81">Ammount DT<br> annual </th>
-		<th width="81">Ammount CT <br>annual</th>
-		<th style="background: #eeeeee;"  width="81">Ammount </th> </tr>
+		<th width="80">Amount DT</th>
+		<th width="81">Amount CT</th>
+		<th width="81">Amount DT<br> annual </th>
+		<th width="81">Amount CT <br>annual</th>
+		<th style="background: #eeeeee;"  width="81">amount </th> </tr>
 		</table>';
 
 
@@ -140,7 +140,7 @@ if ($_POST['show_balance'] == "yes" ) {
 	    $group_id   = $groups['acc_group'];
 
 	    $result1 = $mysqli->query("
-		    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
+		    SELECT items.name, items.acc_group AS name, sum(ledger.amount) AS amnt
 		    FROM items
 		    LEFT JOIN  ledger ON ledger.item_dt=items.id 
 		    WHERE  ledger.date<=\"" . $_POST['to'] . "\" 
@@ -154,7 +154,7 @@ if ($_POST['show_balance'] == "yes" ) {
 	    $group_dt_turn = $row['amnt'];
 	    
 	    $result1 = $mysqli->query("
-		    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
+		    SELECT items.name, items.acc_group AS name, sum(ledger.amount) AS amnt
 		    FROM items
 		    LEFT JOIN  ledger ON ledger.item_ct=items.id 
 		    WHERE  ledger.date<=\"" . $_POST['to'] . "\" 
@@ -169,7 +169,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 
 	    $result1 = $mysqli->query("
-		    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
+		    SELECT items.name, items.acc_group AS name, sum(ledger.amount) AS amnt
 		    FROM items
 		    LEFT JOIN  ledger ON ledger.item_dt=items.id 
 		    WHERE  ledger.date<=\"" . $_POST['to'] . "\" 
@@ -183,7 +183,7 @@ if ($_POST['show_balance'] == "yes" ) {
 	    $group_dt_turn_y = $row['amnt'];
 
 	    $result1 = $mysqli->query("
-		    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
+		    SELECT items.name, items.acc_group AS name, sum(ledger.amount) AS amnt
 		    FROM items
 		    LEFT JOIN  ledger ON ledger.item_ct=items.id 
 		    WHERE  ledger.date<=\"" . $_POST['to'] . "\" 
@@ -220,7 +220,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 
 		    $result2 = $mysqli->query("
-			    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
+			    SELECT items.name, items.acc_group AS name, sum(ledger.amount) AS amnt
 			    FROM items
 			    LEFT JOIN  ledger ON ledger.item_dt=items.id 
 			    WHERE  ledger.date<=\"" . $_POST['to'] . "\" 
@@ -234,7 +234,7 @@ if ($_POST['show_balance'] == "yes" ) {
 		    $acc_dt_turn = $row['amnt'];
 
 		    $result2 = $mysqli->query("
-			    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
+			    SELECT items.name, items.acc_group AS name, sum(ledger.amount) AS amnt
 			    FROM items
 			    LEFT JOIN  ledger ON ledger.item_ct=items.id 
 			    WHERE  ledger.date<=\"" . $_POST['to'] . "\" 
@@ -249,7 +249,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 
 		    $result2 = $mysqli->query("
-			    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
+			    SELECT items.name, items.acc_group AS name, sum(ledger.amount) AS amnt
 			    FROM items
 			    LEFT JOIN  ledger ON ledger.item_dt=items.id 
 			    WHERE  ledger.date<=\"" . $_POST['to'] . "\" 
@@ -263,7 +263,7 @@ if ($_POST['show_balance'] == "yes" ) {
 		    $acc_dt_turn_y = $row['amnt'];
 
 		    $result2 = $mysqli->query("
-			    SELECT items.name, items.acc_group AS name, sum(ledger.ammount) AS amnt
+			    SELECT items.name, items.acc_group AS name, sum(ledger.amount) AS amnt
 			    FROM items
 			    LEFT JOIN  ledger ON ledger.item_ct=items.id 
 			    WHERE  ledger.date<=\"" . $_POST['to'] . "\" 

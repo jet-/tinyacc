@@ -30,7 +30,7 @@ If "Accounted" is unchecked - the transaction is ignored in calculations
 
 Do an initial data entry to initialise the data - for example loading your bank accounts/cards and cash, I am doing it by: 
 
-	cash -- Ammount -- Other
+	cash -- Amount -- Other
 
 Or 
 

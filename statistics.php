@@ -50,7 +50,7 @@ $name=$row['name'];
 
 
 if ($row['type']== "L" ) {
-	$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.ammount) AS amnt FROM items
+	$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.amount) AS amnt FROM items
     LEFT OUTER JOIN  ledger ON ledger.item_dt=items.id and accounted
     WHERE accounted and items.type REGEXP 'L|A' and items.id = $acnt  
     group by DATE_FORMAT(ledger.date,'%Y %m'), items.id
@@ -58,7 +58,7 @@ if ($row['type']== "L" ) {
 
 } else {
 
-$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.ammount) AS amnt                               
+$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.amount) AS amnt                               
     FROM items
     LEFT OUTER JOIN  ledger ON ledger.item_ct=items.id and accounted
     WHERE accounted and items.type REGEXP 'L|A' and items.id = $acnt  

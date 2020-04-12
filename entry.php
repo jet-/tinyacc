@@ -13,7 +13,7 @@ while ($row = $result->fetch_assoc() ) {
 
 if (!isset($_POST['send']) ) {
     if (isset($_GET['order']) ) {
-	$query="SELECT date, item_dt, ammount, item_ct, accounted, text FROM ledger WHERE id=" . $_GET['order'];
+	$query="SELECT date, item_dt, amount, item_ct, accounted, text FROM ledger WHERE id=" . $_GET['order'];
 	$result = $mysqli->query($query);
 	$row = $result->fetch_assoc();
     }
@@ -32,7 +32,7 @@ if (!isset($_POST['send']) ) {
 <tr style="background: #C1FF69;" align="center"> 
   <th> Date </th>  
   <th> DT </th> 
-  <th> Ammount </th> 
+  <th> amount </th> 
   <th> CT </th> 
   <th> TEXT </th>  
   <th> Accounted </th> 
@@ -53,7 +53,7 @@ if (!isset($_POST['send']) ) {
 	</select> </td>
 
     <td> 
-	<input type="text" name="amnt1" value= "<?php echo (isset($row['ammount'])) ? $row['ammount'] : "0.00"; ?>"  size=10 maxlength=10  style="background: #FFFFCC;"  autofocus> 
+	<input type="text" name="amnt1" value= "<?php echo (isset($row['amount'])) ? $row['amount'] : "0.00"; ?>"  size=10 maxlength=10  style="background: #FFFFCC;"  autofocus> 
     </td>
 
     <td> 
@@ -96,7 +96,7 @@ if (isset($_GET['order']) ) {
     $query= "INSERT INTO ";
 }
 
-$query.=" ledger set item_dt=" . $_POST['dt1'] . ", ammount=\"" . $_POST['amnt1'] . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\" ,text=\"" . mysqli_real_escape_string($mysqli,$_POST['note']) . "\"  ";
+$query.=" ledger set item_dt=" . $_POST['dt1'] . ", amount=\"" . $_POST['amnt1'] . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\" ,text=\"" . mysqli_real_escape_string($mysqli,$_POST['note']) . "\"  ";
 
 if (!isset($_GET['order']) ) {
     $query .= " , created=\"". date('Y-m-d H:i:s') . "\" " ;

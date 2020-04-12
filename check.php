@@ -4,7 +4,7 @@ require_once("conf.php");
 
 
 $query = "
-    SELECT ledger.id as id,  t1.name as name_dt, ledger.ammount, t2.name as name_ct, date, time, created, accounted, texts.text as text from items t1, items t2, ledger 
+    SELECT ledger.id as id,  t1.name as name_dt, ledger.amount, t2.name as name_ct, date, time, created, accounted, texts.text as text from items t1, items t2, ledger 
     LEFT JOIN texts on ledger.id=texts.docnum 
     WHERE t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.item_dt=ledger.item_ct 
     ORDER BY ledger.date desc,ledger.id desc";
@@ -23,7 +23,7 @@ if ($row = mysql_fetch_array($result)) {
 echo "<tr> 
         <th> # </th> 
         <th>Item DT</th>  
-        <th> Ammount </th> 
+        <th> amount </th> 
         <th>Item CT</th> 
         <th> Date </th> 
         <th width=670>Text</th>  
@@ -42,7 +42,7 @@ if ($i%2 ==0 ) {
 $i++;
 	 echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] .  "&curr=" .   $_GET['curr'] . "\">". $row['id'] ."</a> </td>";
 	 echo "<td width=\"120\"> " . $row['name_dt'] . " </td>";
-	 echo "<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . " </td>";
+	 echo "<td width=\"70\" align=\"right\"> " . number_format($row['amount'],2) . " </td>";
 	 echo "<td width=\"120\"> " . $row['name_ct'] . " </td>";
 	 echo "<td width=\"100\" align=\"center\"> " . $row['date'] . " </td>";
 	 echo "<td width=\"400\"> " . ($row['text']=="" ? ".": $row['text']) . " </td>";

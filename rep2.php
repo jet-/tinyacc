@@ -58,20 +58,20 @@ $name=$row['name'];
 
 #get start ballance for the account
 $query="
-    SELECT sum(ammount) as ammount from ledger 
+    SELECT sum(amount) as amount from ledger 
     WHERE ledger.date<=\"". $_POST['to']."\" and ledger.item_dt=\"" . $acnt . "\" ";
 
 $result = $mysqli->query($query);
 $row = $result->fetch_assoc();
-$dt_turn=$row['ammount'];
+$dt_turn=$row['amount'];
 
 $query="
-  SELECT sum(ammount) as ammount from ledger 
+  SELECT sum(amount) as amount from ledger 
   WHERE ledger.date<=\"". $_POST['to']."\" and  ledger.item_ct=\"" . $acnt . "\" ";
 
 $result = $mysqli->query($query);
 $row = $result->fetch_assoc();
-$ct_turn=$row['ammount'];
+$ct_turn=$row['amount'];
 
 
 $start_saldo=$dt_turn-$ct_turn;
@@ -85,25 +85,25 @@ if ($_POST['rel'] == "yes" ) {
 }
 
 $query="
-  SELECT sum(ammount) as ammount from ledger 
+  SELECT sum(amount) as amount from ledger 
   WHERE ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and ledger.item_dt=\"" . $acnt . "\" ";
 
 $result = $mysqli->query($query);
 $row = $result->fetch_assoc();
-$dt_turn=$row['ammount'];
+$dt_turn=$row['amount'];
 
 $query="
-  SELECT sum(ammount) as ammount from ledger 
+  SELECT sum(amount) as amount from ledger 
   WHERE ledger.date>=\"". $_POST['from']."\" and ledger.date<=\"". $_POST['to']."\" and  ledger.item_ct=\"" . $acnt . "\" ";
 
 $result = $mysqli->query($query);
 $row = $result->fetch_assoc();
-$ct_turn=$row['ammount'];
+$ct_turn=$row['amount'];
 
 
 
 $query = "
-  SELECT ledger.id as id,  t1.name as name_dt, ledger.ammount, t2.name as name_ct, date, time, created, accounted, text, ledger.item_dt as item_dt
+  SELECT ledger.id as id,  t1.name as name_dt, ledger.amount, t2.name as name_ct, date, time, created, accounted, text, ledger.item_dt as item_dt
   FROM items t1, items t2, ledger 
   WHERE     t1.id=ledger.item_dt 
 	and t2.id=ledger.item_ct 
@@ -129,7 +129,7 @@ if ($result = $mysqli->query($query) ) {
    echo "<thead><tr align=\"center\"> 
 	<th> # </th> 
 	<th>Item DT</th>  
-	<th> Ammount </th> 
+	<th> Amount </th> 
 	<th>Item CT</th> 
 	<th> Date </th> 
 	<th>Text</th>  
@@ -148,7 +148,7 @@ if ($result = $mysqli->query($query) ) {
         $i++;
 	 echo  "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] . "\">". $row['id'] ."</a></td>
 	 	<td width=\"120\"> " . $row['name_dt'] . "</td>
-		<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . "</td>
+		<td width=\"70\" align=\"right\"> " . number_format($row['amount'],2) . "</td>
 		<td width=\"120\"> " . $row['name_ct'] . "</td>
 		<td width=\"100\" align=\"center\"> " . $row['date'] . "</td>
 		<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . "</td>
@@ -164,9 +164,9 @@ if ($result = $mysqli->query($query) ) {
 
 	 echo "<td align=\"right\"> <h6>" . number_format($start_saldo,2) .  " </h6></td>";
          if ( $acnt ==  $row['item_dt'] ) {
-            $start_saldo = $start_saldo - $row['ammount'];
+            $start_saldo = $start_saldo - $row['amount'];
          } else {
-            $start_saldo = $start_saldo + $row['ammount'];
+            $start_saldo = $start_saldo + $row['amount'];
          }
 	 echo "</tr>";
 	
@@ -178,7 +178,7 @@ echo "</table>
 	<pre>
 Turnover DT: " .  number_format($dt_turn,2) ."
 Turnover CT: " .  number_format($ct_turn,2) ."
-    Ammount: " .  number_format($dt_turn - $ct_turn,2) . "
+     Amount: " .  number_format($dt_turn - $ct_turn,2) . "
 </pre>";
 }
 
@@ -204,12 +204,12 @@ if ($row = $result->fetch_assoc() ) {
         $i++;
 	echo  "['" . $row['date'] . "',";
         if ( $acnt ==  $row['item_dt'] ) {
-            $start_saldo1 = $start_saldo1 - $row['ammount'];
+            $start_saldo1 = $start_saldo1 - $row['amount'];
         } else {
-            $start_saldo1 = $start_saldo1 + $row['ammount'];
+            $start_saldo1 = $start_saldo1 + $row['amount'];
         }
 	if ($_POST['diff'] == "yes" ) { 
-		echo abs($row['ammount']) . "],";
+		echo abs($row['amount']) . "],";
 	} else {
 		echo $start_saldo1 . "],";
 	}

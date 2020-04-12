@@ -22,7 +22,7 @@ require_once("menu.php");
 <?php
 	$query ="
 	  SELECT 
-		ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, text
+		ledger.id AS id,  t1.name AS name_dt, ledger.amount, t2.name AS name_ct, date, time, created, accounted, text
 	  FROM 
 		items t1, items t2, ledger
 	  WHERE 
@@ -44,7 +44,7 @@ require_once("menu.php");
 	  echo "<thead><tr> 
 		<th> # </th> 
 		<th>Item DT</th>  
-		<th> Ammount </th> 
+		<th> Amount </th> 
 		<th>Item CT</th> 
 		<th> Date </th> 
 		<th width=500>Text</th>  
@@ -63,7 +63,7 @@ require_once("menu.php");
 		$i++;
 		echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] ."\">". $row['id'] .		"</a></td>
 		 	<td width=\"140\">" . $row['name_dt'] . "</td>
-		 	<td width=\"70\" align=\"right\">" . number_format($row['ammount'],2) . "</td>
+		 	<td width=\"70\" align=\"right\">" . number_format($row['amount'],2) . "</td>
 		 	<td width=\"140\">" . $row['name_ct'] . "</td>
 		 	<td width=\"100\" align=\"center\">" . $row['date'] . "</td>
 		 	<td width=\"400\"> " . ($row['text']=="" ? ".": stripslashes($row['text'])) . "</td>
@@ -107,7 +107,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	#filling $data[$i][2] credit turnover
 	$result = $mysqli->query("
-	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
+	    SELECT items.name AS name, sum(ledger.amount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_dt=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
 		      and ledger.date>=\"" . $_POST['from'] . "\" and accounted 
@@ -122,7 +122,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	#filling $data[$i][3] debit turnover
 	$result = $mysqli->query("
-	    SELECT items.name AS name, sum(ledger.ammount) AS amnt
+	    SELECT items.name AS name, sum(ledger.amount) AS amnt
 	    FROM items
 	    LEFT JOIN  ledger ON ledger.item_ct=items.id and ledger.date<=\"" . $_POST['to'] . "\" 
 		      and ledger.date>=\"" . $_POST['from'] . "\"  and  accounted 
@@ -137,7 +137,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	#filling $data[$i][5] yearly debit turnover
 	$result = $mysqli->query("
-	    SELECT  sum(ledger.ammount) AS amnt
+	    SELECT  sum(ledger.amount) AS amnt
 	    FROM items
 	    LEFT JOIN ledger on ledger.item_dt=items.id and YEAR(ledger.date)=\"" . date("Y",strtotime($_POST['to'])) . "\"  and accounted 
 	    GROUP BY items.id
@@ -152,7 +152,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	#filling $data[$i][6] yearly credit turnover
 	$result = $mysqli->query("
-	      SELECT  sum(ledger.ammount) as amnt
+	      SELECT  sum(ledger.amount) as amnt
 	      FROM items 
 	      LEFT JOIN  ledger on ledger.item_ct=items.id and YEAR(ledger.date)=\"" . date("Y",strtotime($_POST['to'])) . "\"  and accounted
 	      GROUP BY items.id
@@ -185,7 +185,7 @@ if ($_POST['show_balance'] == "yes" ) {
 				<th> Credit Turnover </th> 
 				<th> Debit Turnover <br> annual </th>
 				<th> Credit Turnover <br>annual </th>
-				<th> Ammount </th>   
+				<th> Amount </th>   
 				<th>liab.</th>  
 				<th>asset</th>   
 				<th></th> 

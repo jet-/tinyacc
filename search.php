@@ -13,7 +13,7 @@ require_once("conf.php");
 </form>
 
 <?php
-$query ="SELECT ledger.id AS id,  t1.name AS name_dt, ledger.ammount, t2.name AS name_ct, date, time, created, accounted, text 
+$query ="SELECT ledger.id AS id,  t1.name AS name_dt, ledger.amount, t2.name AS name_ct, date, time, created, accounted, text 
 	FROM items t1, items t2, ledger 
 	WHERE t1.id=ledger.item_dt AND t2.id=ledger.item_ct AND text LIKE \"%". $_POST['txt']."%\"  
 	ORDER BY ledger.date desc,ledger.id desc;";
@@ -32,7 +32,7 @@ $turn = 0;
 
 
 	if ($result = $mysqli->query($query)) {
-	   echo "<thead><tr > <th> </th> <th>Item DT</th>  <th> Ammount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> </tr> </thead>";
+	   echo "<thead><tr > <th> </th> <th>Item DT</th>  <th> amount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> </tr> </thead>";
 
   while($row = $result->fetch_assoc()) {
 	echo "<tr>";
@@ -45,7 +45,7 @@ $turn = 0;
 
 		 echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] .  "&curr=" .   $_GET['curr'] . "\">". $row['id'] ." </a></td>";
 		 echo "<td width=\"120\"> " . $row['name_dt'] . " </td>";
-		 echo "<td width=\"70\" align=\"right\"> " . number_format($row['ammount'],2) . " </td>";
+		 echo "<td width=\"70\" align=\"right\"> " . number_format($row['amount'],2) . " </td>";
 		 echo "<td width=\"120\"> " . $row['name_ct'] . " </td>";
 		 echo "<td width=\"100\" align=\"center\"> " . $row['date'] . " </td>";
 		 echo "<td width=\"400\"> " . ($row['text']=="" ? ".": $row['text']) . " </td>";
@@ -60,7 +60,7 @@ $turn = 0;
 		 echo "<td align=\"center\"> <h6>" . $row['time'] . " </h6></td>";
 		 echo "</tr>";
 	
-         $turn = $turn + $row['ammount'];
+         $turn = $turn + $row['amount'];
 	   } 
 
 
