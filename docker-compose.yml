@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+
+  db:
+    build:
+      context: ./
+      dockerfile: ./docker/mysql/Dockerfile
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    container_name: tinyacc_db
+    env_file:
+      - ./docker/.docker_env
+    volumes:
+      - db-data:/var/lib/mysql
+    ports:
+      - 33306:3306
+    networks:
+      - default
+
+  adminer:
+    image: adminer
+    restart: unless-stopped
+    container_name: tinyacc_db_client
+    ports:
+      - 8080:8080
+    networks:
+      - default
+
+  app:
+    build:
+      context: ./
+      dockerfile: ./docker/app/Dockerfile
+    container_name: tinyacc_app
+    env_file:
+      - ./docker/.docker_env
+    ports:
+      - "8000:80"
+    networks:
+      - default
+    # Note: DB is available within this container through hostname=tinyacc_db
+    depends_on:
+      - db
+
+networks:
+  default:
+
+volumes:
+  db-data:
