@@ -64,5 +64,5 @@ echo "</table>";
 echo "<br><br>";
 
 
-mysql_close();
+$mysqli->close();
 ?>
