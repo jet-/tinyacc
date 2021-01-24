@@ -79,7 +79,7 @@ print "<br>";
 ?>
 
 
-<table class="ref">
+<table class="table table-bordered">
 <caption>    </caption> 
 
 
@@ -117,7 +117,7 @@ $i=0;
 
 } 
 
-print  "<tr> <td>  Total </td> <td> principal +</td> <td>interest: " . number_format($total_paid + $interest_paid,2) . " </td> </tr>";
+print  "<tr> <td align = right>  Total </td> <td> principal +</td> <td>interest: " . number_format($total_paid + $interest_paid,2) . " </td> </tr>";
 echo "</table>";
 
 $mysqli->close();

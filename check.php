@@ -4,22 +4,25 @@ require_once("conf.php");
 
 
 $query = "
-    SELECT ledger.id as id,  t1.name as name_dt, ledger.amount, t2.name as name_ct, date, time, created, accounted, texts.text as text from items t1, items t2, ledger 
+    SELECT ledger.id as id,  t1.name as name_dt, ledger.amount, t2.name as name_ct, date, time, created, accounted, texts.text as text 
+    FROM items t1, items t2, ledger 
     LEFT JOIN texts on ledger.id=texts.docnum 
     WHERE t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.item_dt=ledger.item_ct 
     ORDER BY ledger.date desc,ledger.id desc";
 
 
-$result = mysql_query ($query);
+#$result = $mysqli->query($query);
 
-echo "<table class=ref>  ";
+echo "<table class=\"table table-bordered tablesorter\">";
 echo "<caption> List of transactions with Dt account == Ct account";
 echo "</caption> ";
 
 
 
 $i=1;
-if ($row = mysql_fetch_array($result)) {
+
+if ($result = $mysqli->query($query) ) {
+
 echo "<tr> 
         <th> # </th> 
         <th>Item DT</th>  
@@ -32,7 +35,8 @@ echo "<tr>
         <th width=25 >Last Modified</th> 
       </tr>";
 
-do {
+  while($row = $result->fetch_assoc() ) {
+
 	echo "<tr>";
 if ($i%2 ==0 ) {
 	 echo "<tr style=\"background: #eeeeee;\" >";
@@ -56,7 +60,8 @@ $i++;
 	 echo "<td align=\"center\"> <h6>" . $row['created'] . " </h6></td>";
 	 echo "<td align=\"center\"> <h6>" . $row['time'] . " </h6></td>";
 	 echo "</tr>";
-}while($row = mysql_fetch_array($result));
+
+  }
 
 } else { echo " <hr> no records found! <hr> ";
 }
