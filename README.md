@@ -28,7 +28,7 @@ Tiny accounting app for basic tracking of personal finances. Running on LAMP sta
 If "Accounted" is unchecked - the transaction is ignored in calculations
 
 
-[[images/entry.png]]
+![entry](https://github.com/jet-/tinyacc/blob/master/images/entry.png)
 
 Do an initial data entry to initialise the data - for example loading your bank accounts/cards and cash, I am doing it by: 
 
@@ -74,12 +74,12 @@ and at the bottom the current Balance
 
 * Expenses/Revenue --> To see an report with chart representation 
 
-[[images/expenses.png]]
+![entry](https://github.com/jet-/tinyacc/blob/master/images/expenses.png)
 
 * Mortgage --> Calculation on your mortgage
 
 #
 
-If you want to buy me a coffee/beer - BTC: 1L25rmhgM9yvJYcUsUkNJf49EfFjQYmCbt
+Buy me a coffee/beer - BTC: 1L25rmhgM9yvJYcUsUkNJf49EfFjQYmCbt
 
 #
