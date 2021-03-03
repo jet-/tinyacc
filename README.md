@@ -17,16 +17,18 @@ Tiny accounting app for basic tracking of personal finances. Running on LAMP sta
 
 	git clone https://github.com/jet-/tinyacc.git
 
+6. Edit conf.php to reflect db access
 
-6. Point the browser to https://server/tinyacc/rep1.php?curr=usd
+7. Point the browser to https://server/tinyacc/rep1.php?curr=usd
 
-===========
-
+#
 
 * Add Document -> place an entry in the system
 
 If "Accounted" is unchecked - the transaction is ignored in calculations
 
+
+[[images/entry.png]]
 
 Do an initial data entry to initialise the data - for example loading your bank accounts/cards and cash, I am doing it by: 
 
@@ -40,11 +42,11 @@ You can start adding your daily transactions as they happen. For example cash wi
 
 	cash -- Amount -- Checking account
 
-Paying a bill: 
+* Paying a bill: 
 
 	Electrical bills -- Amount -- Checking account
 
-Depositing money in Savings account: 
+* Depositing money in Savings account: 
 
 	Savings account -- Amount -- Cash
 
@@ -55,8 +57,7 @@ Balances are calculated dynamically and you can account or "un-account" or edit 
 You can create more databases - for example for different currencies (I have one for bitcoins or I should say mini Bitcoins) .There are different reports and charts to have a better clue about you finances. Using the program you can also check when you bought something and whether warranty expired or not by searching by text or part of the text.
 
 
----------------
-
+#
 
 * General Ledger - to see the transactions for period (by default for the current month)
 
@@ -73,10 +74,12 @@ and at the bottom the current Balance
 
 * Expenses/Revenue --> To see an report with chart representation 
 
+[[images/expenses.png]]
+
 * Mortgage --> Calculation on your mortgage
 
----
+#
 
-If you want to donate - Bitcoin address: 1L25rmhgM9yvJYcUsUkNJf49EfFjQYmCbt
+If you want to buy me a coffee/beer - BTC: 1L25rmhgM9yvJYcUsUkNJf49EfFjQYmCbt
 
----
+#
