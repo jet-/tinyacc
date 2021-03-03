@@ -68,6 +68,8 @@ and at the bottom the current Balance
 
 * Acc Statement --> Can see the statement of an account
 
+![entry](https://github.com/jet-/tinyacc/blob/master/images/statement.png)
+
 * Text search --> Search through all the transactions
 
 * Statistics --> View the account ballance through months and years
