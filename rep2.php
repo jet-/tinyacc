@@ -139,7 +139,13 @@ if ($result = $mysqli->query($query) ) {
 	<th>Balance</th> 
       </tr></thead>";
 
+ $output = fopen('data.csv', 'w');
+
+// output the column headings
+ fputcsv($output, array('#', 'Item DT', 'Amount', 'Item CT', 'Date', 'Last Modified', 'Created', 'Stat', 'Text'));
+
   while ($row = $result->fetch_assoc() ) {
+	fputcsv($output, $row);
         if ($i%2 ==0 ) {
                  echo "<tr style=\"background: #eeeeee;\" >";
           } else {
@@ -173,6 +179,7 @@ if ($result = $mysqli->query($query) ) {
 } 
 
 } else { echo " <hr> no records found! <hr> ";}
+fclose($output);
 
 echo "</table>
 	<pre>
@@ -181,6 +188,12 @@ Turnover CT: " .  number_format($ct_turn,2) ."
      Amount: " .  number_format($dt_turn - $ct_turn,2) . "
 </pre>";
 }
+?>
+<a href="data.csv" target="_blank">
+<input type="button" class="button" value="Export CSV" />
+</a>
+<?
+
 
 ?>
 

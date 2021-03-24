@@ -53,7 +53,15 @@ require_once("menu.php");
 		<th width=25 >Last Modified</th> 
 	      </tr></thead>";
 
+
+	 $output = fopen('data.csv', 'w');
+
+	 // output the column headings
+	 fputcsv($output, array('#', 'Item DT', 'Amount', 'Item CT', 'Date', 'Last Modified', 'Created', 'Stat', 'Text'));
+
+
 	  while($row = $result->fetch_assoc() ) {
+		fputcsv($output, $row);
 		echo "<tr>";
 		if ($i%2 ==0 ) {
 			 echo '<tr style="background: #eeeeee;" >';
@@ -80,11 +88,16 @@ require_once("menu.php");
 	  } 
 
 	} else { echo " <hr> no records found! <hr> ";}
-
+	fclose($output);
 	echo "</table>
 		<br><br>";
 }
 
+?>
+<a href="data.csv" target="_blank">
+<input type="button" class="button" value="Export CSV" />
+</a>
+<?
 
 if ($_POST['show_balance'] == "yes" ) { 
 	#ov
