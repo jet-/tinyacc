@@ -9,6 +9,7 @@ CREATE TABLE `items` (
   `type` char(1) DEFAULT NULL,
   `liquidity` char(1) DEFAULT '',
   `orderby` int(5) DEFAULT '9999',
+  `notes` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=latin1;
 
@@ -16,7 +17,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 
-INSERT INTO `items` VALUES (1,0,'Supplies','L','',940),(2,0,'PST','L','',13000),(3,0,'Rent','L','',23000),(4,0,'Received services','L','',1020),(5,0,'Sales','A','',21000),(6,4,'Telephone Expense','L','',960),(7,4,'Food','L','',930),(8,4,'TTC','L','',1000),(9,4,'Fuel','L','',1010),(10,1,'Checking Account','','+',600),(11,1,'Savings Account','','+',830),(12,1,'Cash on hand','','+',100),(13,0,'Received interest','A','',835),(14,0,'Received gov.','A','',22000),(15,0,'Other','','',30000),(16,0,'GST','L','',12000),(17,0,'Salaries','A','',1100),(18,0,'CRA TAX','L','',20000),(19,2,'VISA','','-',800),(20,0,'CPP/QPP','A','',14000),(21,0,'Insurance','L','',11000),(23,0,'HST','L','',11500),(24,4,'Electrical bills','L','',950),(25,0,'Long Term Assets','','',9000),(29,3,'Mortgage Principal','L','',9010),(30,4,'Condo fee','L','',1200),(31,2,'MasterCard','','-',810),(32,0,'Property Tax','L','',11200),(33,3,'Mortgage Interest','L','',9050),(34,2,'Line Of Credit','','-',820),(35,3,'Interest Line of Credit','L','',822),(36,0,'Employment Insurance','A','',21500),(38,0,'Bitcoins BTC','','+',24000),(39,0,'Rent/Lease machinery & equipment','L','',9080),(41,0,'Travel','L','',9060);
+INSERT INTO `items` VALUES (1,12,'Supplies','L','',940,''),(2,6,'PST','L','',13000,''),(3,13,'Rent','L','',23000,''),(4,14,'Received services','L','',1020,''),(5,9,'Sales','A','',21000,''),(6,14,'Telephone Expense','L','',960,''),(7,14,'Food','L','',930,''),(8,14,'TTC','L','',1000,''),(9,14,'Fuel','L','',1010,''),(10,10,'Checking Account','','+',600,'$10.95 monthly fee, waived if ballance is above $3,000. Transactions included per month: 25'),(11,11,'Savings Account','','+',830,'Transactions included per month: 1. Additional Transactions: $3.00 each'),(12,1,'Cash on hand','','+',100,''),(13,5,'Received interest','A','',9055,''),(14,5,'Received gov.','A','',22000,''),(15,90,'Other','','',30000,''),(16,6,'GST','L','',12000,''),(17,5,'Salaries','A','',1100,''),(18,6,'CRA TAX','','',20000,''),(19,2,'VISA','','-',800,''),(20,6,'CPP/QPP','A','',14000,''),(21,7,'Insurance','L','',11000,''),(23,6,'HST','L','',11500,''),(24,14,'Electrical bills','L','',950,''),(25,8,'Long Term Assets','','',9000,''),(29,3,'Mortgage Principal','L','',9010,''),(30,14,'Condo fee','L','',1200,''),(31,2,'MasterCard TD','','-',12100,''),(32,6,'Property Tax','L','',11200,''),(33,15,'Mortgage Interest','L','',9050,''),(34,3,'Line Of Credit','','-',820,''),(35,15,'Interest Line of Credit','L','',822,''),(36,5,'Employment Insurance','A','',21500,''),(38,1,'Bitcoins BTC','','',24000,''),(39,13,'Rent/Lease machinery & equipment','L','',9080,''),(42,2,'MasterCard WalMart','','-',810,''),(41,14,'Travel','L','',9060,''),(43,2,'MasterCard CanTire','','-',815,''),(44,5,'Income MSP Cantire','A','',1150,''),(45,10,'Gift card',NULL,'+',11300,'');
 
 UNLOCK TABLES;
 

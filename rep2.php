@@ -50,11 +50,11 @@ while ($row = $result->fetch_assoc() ) {
 
 $acnt = $_POST['dt1'];
 
-$query="select name from items WHERE id=". $acnt ;
+$query="select name, notes from items WHERE id=". $acnt ;
 $result = $mysqli->query($query);
 $row = $result->fetch_assoc();
 $name=$row['name'];
-
+$notes=$row['notes'];
 
 #get start ballance for the account
 $query="
@@ -186,6 +186,9 @@ echo "</table>
 Turnover DT: " .  number_format($dt_turn,2) ."
 Turnover CT: " .  number_format($ct_turn,2) ."
      Amount: " .  number_format($dt_turn - $ct_turn,2) . "
+<br><br>
+Notes: 
+" . $name . ": " . $notes . "
 </pre>";
 }
 ?>
