@@ -91,13 +91,14 @@ require_once("menu.php");
 	fclose($output);
 	echo "</table>
 		<br><br>";
-}
-
 ?>
 <a href="data.csv" target="_blank">
 <input type="button" class="button" value="Export CSV" />
 </a>
 <?
+}
+
+
 
 if ($_POST['show_balance'] == "yes" ) { 
 	#ov

@@ -130,7 +130,7 @@ if ($_POST['show_balance'] == "yes" ) {
 		<th width="81">Amount CT</th>
 		<th width="81">Amount DT<br> annual </th>
 		<th width="81">Amount CT <br>annual</th>
-		<th style="background: #eeeeee;"  width="81">amount </th> </tr>
+		<th style="background: #eeeeee;"  width="81">Amount </th> </tr>
 		</table>';
 
 
