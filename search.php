@@ -7,9 +7,9 @@ require_once("conf.php");
 <br>
 <form name="form" action="<?php echo $PHP_SELF;?>" method="post" enctype="multipart/form-data">
 
-    &nbsp;&nbsp;&nbsp; <b> Text</b>: 	<input type="text" name="txt" value="<?php echo $_POST['txt'] ; ?>"size=40 maxlength=40  style="background: #FFFFCC;"  autofocus>
+    &nbsp;&nbsp;&nbsp; <b> Text</b>: 	<input type="text" name="txt" value="<?php echo $_POST['txt'] ; ?>"size=40 maxlength=40  		  style="background: #FFFFCC;"  autofocus>
 		<input type="submit" name="send" value="Search">
-<br><br>
+    <br><br>
 </form>
 
 <?php
@@ -24,17 +24,23 @@ $rowCount = mysqli_num_rows($result);
 if ($_POST['txt'] <> ""){
 
         echo '<table class="table table-bordered tablesorter">  ';
-echo "<caption>  Search text: &nbsp;&nbsp;&nbsp; \"".$_POST['txt'] . "\"  &nbsp;&nbsp; ". $rowCount . " results found" ;
-echo "</caption> ";
+	echo "<caption>  Search text: &nbsp;&nbsp;&nbsp; \"".$_POST['txt'] . "\"  &nbsp;&nbsp; ". $rowCount . " results found" ;
+	echo "</caption> ";
 
-$i=1;
-$turn = 0;
+	$i=1;
+	$turn = 0;
 
 
 	if ($result = $mysqli->query($query)) {
 	   echo "<thead><tr > <th> </th> <th>Item DT</th>  <th> amount </th> <th>Item CT</th> <th> Date </th> <th>Text</th>  <th>Status</th> <th> Created</th>  <th>Last Modified</th> </tr> </thead>";
 
+	 $output = fopen('data.csv', 'w');
+
+	 // output the column headings
+	 fputcsv($output, array('#', 'Item DT', 'Amount', 'Item CT', 'Date', 'Last Modified', 'Created', 'Stat', 'Text'));
+
   while($row = $result->fetch_assoc()) {
+	fputcsv($output, $row);
 	echo "<tr>";
 	if ($i%2 ==0 ) {
 		 echo "<tr style=\"background: #eeeeee;\" >";
@@ -43,7 +49,7 @@ $turn = 0;
 	}
 	$i++;
 
-		 echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] .  "&curr=" .   $_GET['curr'] . "\">". $row['id'] ." </a></td>";
+		 echo "<td width=\"20\"> <a href=\"entry.php?order=" . $row['id'] . "&curr=" . $_GET['curr'] . "\">". $row['id'] ." </a></td>";
 		 echo "<td width=\"120\"> " . $row['name_dt'] . " </td>";
 		 echo "<td width=\"70\" align=\"right\"> " . number_format($row['amount'],2) . " </td>";
 		 echo "<td width=\"120\"> " . $row['name_ct'] . " </td>";
@@ -61,19 +67,21 @@ $turn = 0;
 		 echo "</tr>";
 	
          $turn = $turn + $row['amount'];
-	   } 
+	 } 
 
-
-
-echo "</pre>";	} else { echo " <hr> Sorry, no records found! <hr> ";	}
-
-
+	echo "</pre>";	} else { echo " <hr> Sorry, no records found! <hr> ";	}
+	fclose($output);
 	echo "</table>";
+
 }
 echo "<pre>";
 echo "             Turnover: " .  number_format($turn,2) ." <br>";
-echo "</pre>";
-
+echo "</pre><br>";
+?>
+<a href="data.csv" target="_blank">
+<input type="button" class="button" value="Export CSV" />
+</a>
+<?
 $mysqli->close();
 
 ?>
