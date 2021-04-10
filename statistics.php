@@ -40,8 +40,7 @@ while ($row = $result->fetch_assoc() ) {
 
 <?php
 
-$acnt = $_POST['dt1'];
-
+$acnt = isset($_POST['dt1']) ? $_POST['dt1'] : 35;
 
 $query="select name,type from items WHERE id=". $acnt ;
 $result = $mysqli->query($query);
