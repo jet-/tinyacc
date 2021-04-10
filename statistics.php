@@ -32,7 +32,7 @@ while ($row = $result->fetch_assoc() ) {
 ?>
     &nbsp;&nbsp;&nbsp; 
    
-		        <input type="submit" name="send" value="Generate" autofocus>
+  <input type="submit" name="send" value="Generate" autofocus>
 <br><br>
 
 </fieldset>
@@ -52,58 +52,58 @@ if ($row['type']== "L" ) {
 	$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.amount) AS amnt FROM items
     LEFT OUTER JOIN  ledger ON ledger.item_dt=items.id and accounted
     WHERE accounted and items.type REGEXP 'L|A' and items.id = $acnt  
-    group by DATE_FORMAT(ledger.date,'%Y %m'), items.id
-    order by ledger.date, items.id");
+    GROUP BY DATE_FORMAT(ledger.date,'%Y %m'), items.id
+    ORDER BY ledger.date, items.id");
 
 } else {
 
-$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.amount) AS amnt                               
+$result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.name AS name, sum(ledger.amount) AS amnt
     FROM items
     LEFT OUTER JOIN  ledger ON ledger.item_ct=items.id and accounted
-    WHERE accounted and items.type REGEXP 'L|A' and items.id = $acnt  
-    group by DATE_FORMAT(ledger.date,'%Y %m'), items.id
-    order by ledger.date, items.id");
+    WHERE accounted and items.type REGEXP 'L|A' and items.id = $acnt 
+    GROUP BY DATE_FORMAT(ledger.date,'%Y %m'), items.id
+    ORDER BY ledger.date, items.id");
 }
 
-echo "<table class=\"ref\"  bgcolor=\"#DDD4FF\">
-<tr>
-    <th>Year</th> 
-    <th>January</th> 
-    <th>February</th> 
-    <th>March</th> 
-    <th>April</th> 
-    <th>May</th> 
-    <th>June</th> 
-    <th>July</th> 
-    <th>August</th> 
-    <th>September</th> 
-    <th>October</th> 
-    <th>November</th> 
-    <th>December</th>
-    <th>Total for the Year</th>
-</tr>";
+	if ($row = $result->fetch_assoc() ) {
+	echo "<table class=\"ref\"  bgcolor=\"#DDD4FF\">
+	<tr>
+	    <th>Year</th> 
+	    <th>January</th> 
+	    <th>February</th> 
+	    <th>March</th> 
+	    <th>April</th> 
+	    <th>May</th> 
+	    <th>June</th> 
+	    <th>July</th> 
+	    <th>August</th> 
+	    <th>September</th> 
+	    <th>October</th> 
+	    <th>November</th> 
+	    <th>December</th>
+	    <th>Total for the Year</th>
+	</tr>";
 
-
-echo "<caption> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </caption>"; 
+	echo "<caption> $name &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </caption>"; 
 
 	$d ="";
 	$sum=0;
-	if ($row = $result->fetch_assoc() ) {
 
 	while($row = $result->fetch_assoc() ) {
             if ($d <> $row['date']) 
                 {
                     $d = $row['date'];
-                    echo "<td align=\"right\"><b>" . number_format($sum,2) . "</b></td></tr> <tr> <td> <b>"  . $row['date'] . "</b></td>"; $sum=0;
+                    echo "<td align=\"right\"><b>" . number_format($sum,2) . "</b></td></tr> <tr> <td> <b>"  . $row['date'] . "</b></td>"; 			    $sum=0;
                 }    
                 echo "<td align='right'>" . number_format($row['amnt'],0) . "</td>" ; $sum = $sum + $row['amnt'];
                
 
 	       }  
-	} else { echo " <hr> no records found! <hr> ";}
+
+	echo "<td colspan=\"0\" align=\"right\"><b>" . number_format($sum,2) . "</b></td></tr>";
+	} else { echo " <hr> No records found! <hr> ";}
 
 echo "</table>";
-
 
 $mysqli->close();
 ?>
