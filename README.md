@@ -80,6 +80,53 @@ and at the bottom the current Balance
 
 * Mortgage --> Calculation on your mortgage
 
+### Setup Docker
+
+1. Install `docker` and `docker-compose`:
+
+    - https://docs.docker.com/get-docker/
+    - https://docs.docker.com/compose/install/
+
+2. Create `.docker_env` file in the folder `docker`
+
+    ```
+    touch docker/.docker_env
+    ```
+
+3. Enter the following content
+
+    ```
+    MYSQL_USER=tinyacc
+    MYSQL_PASSWORD=password
+    MYSQL_ROOT_PASSWORD=root
+    MYSQL_DATABASE=acc_usd
+    TINYACC_DB_HOSTNAME=tinyacc_db
+    ```
+
+    **Note:** If you make changes to the code, use `docker-compose up --build` to rebuild the project.
+
+
+### Running using Docker
+
+1. Start the application
+
+    ```
+    docker-compose up
+    ```
+
+2. Point your browser to http://localhost:8000/rep1.php?curr=usd
+
+### Manage Docker app database
+
+1. Start the application
+
+    ```
+    docker-compose up
+    ```
+
+2. Point your browser to http://localhost:8080/
+
+
 #
 
 Buy me a coffee/beer - BTC: 1L25rmhgM9yvJYcUsUkNJf49EfFjQYmCbt
