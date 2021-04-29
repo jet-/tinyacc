@@ -39,7 +39,7 @@ if (!isset($_POST['send']) ) {
 </tr>
 
     <tr align="center" valign="top" > 
-    <td>  <input type="text" name="date"   value= "<?php echo (isset($row['date'])) ? $row['date'] : date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" > </td>
+    <td>  <input class="mydate1"  type="text" name="date"  placeholder="YYYY-MM-DD" value= "<?php echo (isset($row['date'])) ? $row['date'] : date("Y-m-d"); ?>" size="10" maxlength="10"  style="background: #FFFFCC;" > </td>
     <td>  <select name="dt1">
 <?php
     for ($i=1;$i<$counter;$i++) {
@@ -53,7 +53,7 @@ if (!isset($_POST['send']) ) {
 	</select> </td>
 
     <td> 
-	<input type="text" name="amnt1" value= "<?php echo (isset($row['amount'])) ? $row['amount'] : "0.00"; ?>"  size=10 maxlength=10  style="background: #FFFFCC;"  autofocus> 
+	<input type="text" name="amnt1" placeholder="0.00" value= "<?php echo (isset($row['amount'])) ? $row['amount'] : "0.00"; ?>"  size=10 maxlength=10  style="background: #FFFFCC;"  autofocus> 
     </td>
 
     <td> 
@@ -120,4 +120,5 @@ echo "New record has id: " . mysqli_insert_id($mysqli);
 
 $mysqli->close();
 ?>
-
+<script type="text/javascript" src="js/cleave.js"></script>
+<script type="text/javascript" src="js/k.js"></script>

@@ -32,9 +32,9 @@ while ($row = $result->fetch_assoc() ) {
 ?>
     &nbsp;&nbsp;&nbsp; 
    <b> From date</b>: 
-	<input type="text"   name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
+	<input class="mydate1" type="text"   name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10  style="background: #FFFFCC;" > &nbsp;&nbsp;&nbsp; 
    <b> To date</b>: 
-	<input type="text"   name="to"  value= "<?php echo date("Y-m-d"); ?>" size=10 maxlength=10 style="background: #FFFFCC;" >
+	<input class="mydate2" type="text"   name="to"  value= "<?php echo date("Y-m-d"); ?>" size=10 maxlength=10 style="background: #FFFFCC;" >
 	<input type="checkbox" name="table" value="yes" checked> Table &nbsp;&nbsp;
 	<input type="checkbox" name="graph" value="yes" > Chart &nbsp;&nbsp;
 	<input type="checkbox" name="rel"   value="yes" > Relative &nbsp;&nbsp;

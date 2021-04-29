@@ -1,7 +1,7 @@
 # tinyacc
 https://github.com/jet-/tinyacc
 
-Tiny accounting app for basic tracking of personal finances. Running on LAMP stack
+Tiny accounting app for basic personal finances tracking. Running on LAMP stack
 
 1. You have to create Database in MySQL/MariaDB server (for example acc_usd)
 
@@ -34,7 +34,7 @@ Do an initial data entry to initialise the data - for example loading your bank 
 
 	cash -- Amount -- Other
 
-Or 
+or 
 
 	Checking account -- Amount -- Other
 

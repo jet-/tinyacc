@@ -11,9 +11,9 @@ require_once("menu.php");
 <legend>Report</legend>
 
     <br> <b> From date</b>: 
-	<input type="text" name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10 style="background: #FFFFCC;"> &nbsp;&nbsp;&nbsp;
+	<input class="mydate1" type="text" name="from" value= "<?php echo date("Y-m")."-01"; ?>" size=10 maxlength=10 style="background: #FFFFCC;"> &nbsp;&nbsp;&nbsp;
     <b> To date</b>: 
-	<input type="text"     name="to"      value= "<?php echo date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" >
+	<input class="mydate2" type="text"     name="to"      value= "<?php echo date("Y-m-d"); ?>"size=10 maxlength=10  style="background: #FFFFCC;" >
 	<input type="submit"   name="send"    value="Generate" autofocus >
 <br><br>
 </fieldset>
@@ -63,8 +63,6 @@ require_once("menu.php");
 	    $counter++;
 	}
 
-
-
 	# $data[][1] - item name
 	#	 [2] - total turnover DT 
 	#	 [3] - total turnover CT
@@ -75,8 +73,7 @@ require_once("menu.php");
 	#	 [8] - orderby
 	#	[11] - account id
 
-#	echo "<table  class=\"ref\"  bgcolor=\"#DDD4FF\">";
-	echo "<caption> from: ". $_POST['from'] . "&nbsp;&nbsp; to: ". $_POST['to'] . "<p>";
+	echo "<caption> from: <b>". $_POST['from'] . "&nbsp;&nbsp; </b> to: <b>". $_POST['to'] . "</b><p>";
     echo "</caption> ";
   
 	$prihod=0;
@@ -103,8 +100,6 @@ echo '
 ';
 
 
-
-
 	$liq=0;
 
 	for ($i=1;$i<$counter;$i++) {
@@ -113,9 +108,7 @@ echo '
                 echo  $data[$i][2] - $data[$i][3] . "],";
             }
         }
-
 ?>
-
         ]);
 
         var options = {
@@ -132,7 +125,6 @@ echo '
 
 <?php
 echo '
-   <script type="text/javascript" src="js/loader.js"></script>
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
@@ -149,9 +141,7 @@ echo '
                 echo  $data[$i][3] - $data[$i][2] . "],";
             }
         }
-
 ?>
-
         ]);
 
         var options = {
@@ -167,10 +157,14 @@ echo '
 
 
 <div id="donutchart1" style="width: 900px; height: 500px;"></div>
-
+<br>
 Expenses: <b><?php  echo number_format((-1) * $razhod,2); ?> </b><br>
 <p>
-&nbspRevenue: <b><?php  echo number_format($prihod,2); ?> </b><br>
+&nbsp;Revenue: <b><?php  echo number_format($prihod,2); ?> </b>
+
+&emsp;&emsp;&emsp;&emsp; Diff: <b><?php  echo number_format($prihod+$razhod,2); ?> </b><br>
+
+
 <div id="donutchart2" style="width: 900px; height: 500px;"></div>
 
 

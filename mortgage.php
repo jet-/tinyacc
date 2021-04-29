@@ -40,7 +40,7 @@ $start_saldo=$dt_turn-$ct_turn;
 
 $current_owed = -1 *  $start_saldo;
 $annual_interest = 0.03;
-$yearly_payment =  26 * 352.12;
+$yearly_payment =  26 * 352.12; //byweekly in my case
 
 
 ?>
@@ -62,11 +62,11 @@ $yearly_payment =  26 * 352.12;
 
 <?php
 
-$current_owed = $_POST['current_owed'];
+$current_owed 	= $_POST['current_owed'];
 $yearly_payment = $_POST['yearly_payment'];
 $annual_interest = $_POST['annual_interest'];
-$interest_paid = $_POST['interest_paid'];
-$total_paid = $current_owed;
+$interest_paid 	= $_POST['interest_paid'];
+$total_paid	= $current_owed;
 
 
 print "<p><br><b>Current amount: </b>" . number_format($current_owed,2);
