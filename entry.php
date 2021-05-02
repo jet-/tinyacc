@@ -53,7 +53,7 @@ if (!isset($_POST['send']) ) {
 	</select> </td>
 
     <td> 
-	<input type="text" name="amnt1" placeholder="0.00" value= "<?php echo (isset($row['amount'])) ? $row['amount'] : "0.00"; ?>"  size=10 maxlength=10  style="background: #FFFFCC;"  autofocus> 
+	<input class="mynum" type="text" name="amnt1" placeholder="0.00" value= "<?php echo (isset($row['amount'])) ? $row['amount'] : "0.00"; ?>"  size=10 maxlength=10  style="background: #FFFFCC;"  autofocus> 
     </td>
 
     <td> 
@@ -96,7 +96,7 @@ if (isset($_GET['order']) ) {
     $query= "INSERT INTO ";
 }
 
-$query.=" ledger set item_dt=" . $_POST['dt1'] . ", amount=\"" . $_POST['amnt1'] . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\" ,text=\"" . mysqli_real_escape_string($mysqli,$_POST['note']) . "\"  ";
+$query.=" ledger set item_dt=" . $_POST['dt1'] . ", amount=\"" . str_replace(",","",$_POST['amnt1']) . "\", item_ct=" . $_POST['ct1'] . ", date=\"" . $_POST['date'] . "\" ,text=\"" . mysqli_real_escape_string($mysqli,$_POST['note']) . "\"  ";
 
 if (!isset($_GET['order']) ) {
     $query .= " , created=\"". date('Y-m-d H:i:s') . "\" " ;
@@ -120,5 +120,4 @@ echo "New record has id: " . mysqli_insert_id($mysqli);
 
 $mysqli->close();
 ?>
-<script type="text/javascript" src="js/cleave.js"></script>
-<script type="text/javascript" src="js/k.js"></script>
+
