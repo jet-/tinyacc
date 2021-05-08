@@ -208,7 +208,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	$prihod=0;
 	$razhod=0;
-	for ($i=1;$i<$counter;$i++) {
+	for ($i=0;$i<$counter;$i++) {
 		if ($data[$i][4] == "L" ) { 
 		    $razhod += ($data[$i][3] - $data[$i][2]);
 		}
@@ -220,7 +220,7 @@ if ($_POST['show_balance'] == "yes" ) {
 
 	$liq=0;
 
-	for ($i=1;$i<$counter;$i++) {
+	for ($i=0;$i<$counter;$i++) {
 	    if ($data[$i][2] <> 0 or $data[$i][3] <> 0) {
 		echo "<tr>
 			<td> <a href=\"rep2.php?account=" . number_format($data[$i][11],0) . "&curr=" . $_GET['curr'] . "\">". $data[$i][1] . " </a></td>
@@ -255,6 +255,15 @@ if ($_POST['show_balance'] == "yes" ) {
 		    $liq += (-1)*($data[$i][3] - $data[$i][2]);
 		}
 	}
+
+	echo "<b><tr>
+	<td align=\"center\">TOTAL</td>
+	<td align=\"right\">" . number_format( array_sum(array_column($data,2)),2) . "</td>
+	<td align=\"right\">" . number_format( array_sum(array_column($data,3)),2) . "</td>
+	<td align=\"right\">" . number_format( array_sum(array_column($data,5)),2) . "</td>
+	<td align=\"right\">" . number_format( array_sum(array_column($data,6)),2) . "</td>
+	<td></td> <td></td> <td></td>
+	</tr></b>";
 
 	echo "</table>
 		<br><pre>
