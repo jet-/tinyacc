@@ -28,7 +28,7 @@ echo $tables_heather;
 echo 	"<caption> Monthly Profit </caption>"; 
 
 $counter=1;
-for ($yyyy=2006;$yyyy<2030;$yyyy++) {
+for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 	echo "<tr> <td><b> $yyyy </b></td>";
 	$total = 0;
 	for ($mm=01;$mm<13;$mm++) {
@@ -51,7 +51,7 @@ echo $tables_heather;
 echo 	"<caption> Monthly Revenue </caption>"; 
 
 $counter=1;
-for ($yyyy=2006;$yyyy<2030;$yyyy++) {
+for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 	echo "<tr> <td><b> $yyyy </b></td>";
 	$total = 0;
 	for ($mm=01;$mm<13;$mm++) {
@@ -70,7 +70,7 @@ echo $tables_heather;
 echo 	"<caption> Monthly Expenses </caption>"; 
 
 $counter=1;
-for ($yyyy=2006;$yyyy<2030;$yyyy++) {
+for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 	echo "<tr> <td><b> $yyyy </b></td>";
 	$total = 0;
 	for ($mm=01;$mm<13;$mm++) {
