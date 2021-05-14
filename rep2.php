@@ -186,9 +186,7 @@ echo "</table>
 Turnover DT: " .  number_format($dt_turn,2) ."
 Turnover CT: " .  number_format($ct_turn,2) ."
      Amount: " .  number_format($dt_turn - $ct_turn,2) . "
-<br><br>
-Notes: 
-" . $name . ": " . $notes . "
+
 </pre>";
 }
 ?>
@@ -253,5 +251,11 @@ chart.draw(data, options);
 if ($_POST['graph'] == "yes" ) { 
 	echo '<div id="chart_div" style="width: 900px; height: 500px;"></div>';
 }
+
+echo "<pre><br><br>
+Notes: 
+--------------------------------------
+ $name : $notes </pre>";
+
 ?>
 
