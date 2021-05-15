@@ -3,6 +3,11 @@
 require_once("conf.php");
 require_once("menu.php");
 
+    if (isset($_GET['from']) ) {
+	$_POST['from'] = substr($_GET['from'],0,4) . "-" . substr($_GET['from'],4,2) . "-01"; 
+	$_POST['to']   = substr($_GET['from'],0,4) . "-" . substr($_GET['from'],4,2) . "-31";
+    } else {
+
 
 ?>
 <br><br><br>
@@ -19,7 +24,7 @@ require_once("menu.php");
 </fieldset>
 </form>
 <?php
-
+}
 	#ov
 	#type_: L - razhod; A - prihod
 	$result = $mysqli->query("select  id, name, type, liquidity, orderby from items ORDER by orderby ");

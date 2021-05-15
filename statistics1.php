@@ -36,7 +36,8 @@ for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 		list ($revenue, $expenses) = getmonthly($yyyy, $mm);
 		$profit = $revenue - $expenses;
 		$total = $total + $profit;
-		echo "<td align=\"right\"> " . number_format($profit,0) . "</td>";
+		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
+			 number_format($profit,0) . " </a> </td>";
         }
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
 	$data[$counter][1]= "\"" . $yyyy . "\"";
@@ -58,7 +59,8 @@ for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 	        $mm =  str_pad($mm, 2, '0', STR_PAD_LEFT);
 		list ($revenue, $expenses) = getmonthly($yyyy, $mm);
 		$total = $total + $revenue;
-		echo "<td align=\"right\"> " . number_format($revenue,0) . "</td>";
+		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
+			 number_format($revenue,0) . " </a> </td>";
         }
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
 	$data[$counter][2]= number_format($total   ,0,".","");
@@ -77,7 +79,8 @@ for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 	        $mm =  str_pad($mm, 2, '0', STR_PAD_LEFT);
 		list ($revenue, $expenses) = getmonthly($yyyy, $mm);
 		$total = $total + $expenses;
-		echo "<td align=\"right\"> " . number_format($expenses,0) . "</td>";
+		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
+			 number_format($expenses,0) . " </a> </td>";
         }
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
 	$data[$counter][3]= number_format($total   ,0,".","");
