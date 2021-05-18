@@ -4,8 +4,8 @@ require_once("conf.php");
 require_once("menu.php");
 
 
-$tables_heather ="
-	<table class=\"ref\"  bgcolor=\"#DDD4FF\">
+$tables_heather ='
+	<table class="ref"  bgcolor="#DDD4FF">
 	<tr>
 	    <th>Year</th> 
 	    <th>January</th> 
@@ -20,8 +20,9 @@ $tables_heather ="
 	    <th>October</th> 
 	    <th>November</th> 
 	    <th>December</th>
+	    <th>Average</th>
 	    <th>Total for the Year</th>
-	</tr>";
+	</tr>';
 
 
 echo $tables_heather;
@@ -31,7 +32,7 @@ $counter=1;
 for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 	echo "<tr> <td><b> $yyyy </b></td>";
 	$total = 0;
-	for ($mm=01;$mm<13;$mm++) {
+	for ($mm = 01; $mm < 13; $mm++) {
 	        $mm =  str_pad($mm, 2, '0', STR_PAD_LEFT);
 		list ($revenue, $expenses) = getmonthly($yyyy, $mm);
 		$profit = $revenue - $expenses;
@@ -39,9 +40,10 @@ for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
 			 number_format($profit,0) . " </a> </td>";
         }
+	echo "<td align=\"right\"><b>" . number_format($total/12,2) . "</b></td>";
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
-	$data[$counter][1]= "\"" . $yyyy . "\"";
-	$data[$counter][4]= number_format($total   ,0,".","");
+	$data[$counter][1] = "\"" . $yyyy . "\"";
+	$data[$counter][4] = number_format($total   ,0,".","");
 	$counter++;
 } 
 echo "</table>";
@@ -55,15 +57,16 @@ $counter=1;
 for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 	echo "<tr> <td><b> $yyyy </b></td>";
 	$total = 0;
-	for ($mm=01;$mm<13;$mm++) {
+	for ($mm=01; $mm < 13; $mm++) {
 	        $mm =  str_pad($mm, 2, '0', STR_PAD_LEFT);
 		list ($revenue, $expenses) = getmonthly($yyyy, $mm);
 		$total = $total + $revenue;
 		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
 			 number_format($revenue,0) . " </a> </td>";
         }
+	echo "<td align=\"right\"><b>" . number_format($total/12,2) . "</b></td>";
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
-	$data[$counter][2]= number_format($total   ,0,".","");
+	$data[$counter][2] = number_format($total   ,0,".","");
 	$counter++;
 }
 echo "</table>";
@@ -75,15 +78,16 @@ $counter=1;
 for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 	echo "<tr> <td><b> $yyyy </b></td>";
 	$total = 0;
-	for ($mm=01;$mm<13;$mm++) {
+	for ($mm = 01; $mm < 13; $mm++) {
 	        $mm =  str_pad($mm, 2, '0', STR_PAD_LEFT);
 		list ($revenue, $expenses) = getmonthly($yyyy, $mm);
 		$total = $total + $expenses;
 		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
 			 number_format($expenses,0) . " </a> </td>";
         }
+	echo "<td align=\"right\"><b>" . number_format($total/12,2) . "</b></td>";
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
-	$data[$counter][3]= number_format($total   ,0,".","");
+	$data[$counter][3] = number_format($total   ,0,".","");
 	$counter++;
 }
 echo "</table>";
@@ -110,7 +114,7 @@ function getmonthly($yyyy, $mm) {
 
 	$query = "SELECT sum(amount) as amnt
 	    FROM ledger
-	    Left JOIN  items ON ledger.item_dt=items.id
+	    LEFT JOIN  items ON ledger.item_dt=items.id
 	    WHERE accounted 
 		AND DATE_FORMAT(ledger.date,'%Y %m') = \"$yyyy $mm\"
 		AND items.type = 'L' ";
@@ -119,7 +123,6 @@ function getmonthly($yyyy, $mm) {
 	while($row = $result->fetch_assoc() ) {
 		$expenses = $row['amnt'];
 	}  
-
 
 	return array($revenue, $expenses);
 }
@@ -139,7 +142,7 @@ $mysqli->close();
         var data = google.visualization.arrayToDataTable([
 	['Year', 'Revenue', 'Expenses', 'Profit']
 <?php
-	for ($i=1;$i<$counter;$i++) {
+	for ($i = 1; $i < $counter; $i++) {
 		echo ",\n [ " . $data[$i][1] . "," . $data[$i][2]  . "," . $data[$i][3]  . "," . $data[$i][4]  . "]"; 
 	}
 ?>  ]);
