@@ -81,6 +81,7 @@ $result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.na
 	    <th>October</th> 
 	    <th>November</th> 
 	    <th>December</th>
+	    <th>Average</th>
 	    <th>Total for the Year</th>
 	</tr>";
 
@@ -93,11 +94,11 @@ $result = $mysqli->query("SELECT DATE_FORMAT(ledger.date,'%Y') as date, items.na
             if ($d <> $row['date']) 
                 {
                     $d = $row['date'];
-                    echo "<td align=\"right\"><b>" . number_format($sum,2) . "</b></td></tr> <tr> <td> <b>"  . $row['date'] . "</b></td>"; 			    $sum=0;
+ 	echo "<td align=\"right\"><b>" 		. number_format($sum/12,0) . "</b></td>";
+                   echo "<td align=\"right\"><b>" . number_format($sum,2) . "</b></td></tr> <tr> <td> <b>"  . $row['date'] . "</b></td>"; 			    $sum=0;
                 }    
                 echo "<td align='right'>" . number_format($row['amnt'],0) . "</td>" ; $sum = $sum + $row['amnt'];
-               
-
+ 
 	       }  
 
 	echo "<td colspan=\"0\" align=\"right\"><b>" . number_format($sum,2) . "</b></td></tr>";
