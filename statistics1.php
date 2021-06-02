@@ -40,7 +40,7 @@ for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
 			 number_format($profit,0) . " </a> </td>";
         }
-	echo "<td align=\"right\"><b>" . number_format($total/12,2) . "</b></td>";
+	echo "<td align=\"right\"><b>" . number_format($total/12,0) . "</b></td>";
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
 	$data[$counter][1] = "\"" . $yyyy . "\"";
 	$data[$counter][4] = number_format($total   ,0,".","");
@@ -64,7 +64,7 @@ for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
 			 number_format($revenue,0) . " </a> </td>";
         }
-	echo "<td align=\"right\"><b>" . number_format($total/12,2) . "</b></td>";
+	echo "<td align=\"right\"><b>" . number_format($total/12,0) . "</b></td>";
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
 	$data[$counter][2] = number_format($total   ,0,".","");
 	$counter++;
@@ -85,7 +85,7 @@ for ($yyyy=2006; $yyyy <= date('Y'); $yyyy++) {
 		echo "<td align=\"right\"><a href=\"rep3.php?from=" . $yyyy . $mm . "&curr=" . $_GET['curr'] . "\"  target=\"_blank\" >" .
 			 number_format($expenses,0) . " </a> </td>";
         }
-	echo "<td align=\"right\"><b>" . number_format($total/12,2) . "</b></td>";
+	echo "<td align=\"right\"><b>" . number_format($total/12,0) . "</b></td>";
 	echo "<td align=\"right\"><b>" . number_format($total,2) . "</b></td></tr>";
 	$data[$counter][3] = number_format($total   ,0,".","");
 	$counter++;
