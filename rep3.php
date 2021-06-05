@@ -160,8 +160,10 @@ echo '
 
 </script>
 
-
-<div id="donutchart1" style="width: 900px; height: 500px;"></div>
+<table> <tr> 
+<td> <div id="donutchart1" style="width: 800px; height: 600px;"></div> </td>
+<td> <div id="donutchart2" style="width: 800px; height: 600px;"></div> </td>
+</tr> </table>
 <br>
 Expenses: <b><?php  echo number_format((-1) * $razhod,2); ?> </b><br>
 <p>
@@ -170,6 +172,5 @@ Expenses: <b><?php  echo number_format((-1) * $razhod,2); ?> </b><br>
 &emsp;&emsp;&emsp;&emsp; Diff: <b><?php  echo number_format($prihod+$razhod,2); ?> </b><br>
 
 
-<div id="donutchart2" style="width: 900px; height: 500px;"></div>
 
 
