@@ -188,11 +188,12 @@ Turnover CT: " .  number_format($ct_turn,2) ."
      Amount: " .  number_format($dt_turn - $ct_turn,2) . "
 
 </pre>";
-echo "<pre><br><br>
-Notes: 
---------------------------------------
-$name: 
-$notes </pre>";
+echo '<pre><br><br>
+Notes: <h5 style="border:blue; border-width:1px; border-style:dashed; width: fit-content;">
+' . $name  . ': 
+' . $notes . '
+
+</h5></pre>';
 
 }
 ?>
@@ -255,6 +256,7 @@ chart.draw(data, options);
 
 <?php
 if ($_POST['graph'] == "yes" ) { 
+
 	echo '<div id="chart_div" style="width: 900px; height: 500px;"></div>';
 }
 
