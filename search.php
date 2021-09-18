@@ -81,7 +81,7 @@ echo "</pre><br>";
 <a href="data.csv" target="_blank">
 <input type="button" class="button" value="Export CSV" />
 </a>
-<?
+<?php
 $mysqli->close();
 
 ?>

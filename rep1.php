@@ -95,7 +95,7 @@ require_once("menu.php");
 <a href="data.csv" target="_blank">
 <input type="button" class="button" value="Export CSV" />
 </a>
-<?
+<?php
 }
 
 
@@ -276,6 +276,5 @@ if ($_POST['show_balance'] == "yes" ) {
 
 $mysqli->close();
 ?>
-
 
 
