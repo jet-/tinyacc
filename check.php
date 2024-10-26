@@ -4,9 +4,8 @@ require_once("conf.php");
 
 
 $query = "
-    SELECT ledger.id as id,  t1.name as name_dt, ledger.amount, t2.name as name_ct, date, time, created, accounted, texts.text as text 
+    SELECT ledger.id as id,  t1.name as name_dt, ledger.amount, t2.name as name_ct, date, time, created, accounted, text 
     FROM items t1, items t2, ledger 
-    LEFT JOIN texts on ledger.id=texts.docnum 
     WHERE t1.id=ledger.item_dt and t2.id=ledger.item_ct and ledger.item_dt=ledger.item_ct 
     ORDER BY ledger.date desc,ledger.id desc";
 

@@ -115,6 +115,9 @@ if (isset($_GET['order']) ) {
 $result = $mysqli->query($query);
 echo "<br> Accounted! <br>";
 echo "New record has id: " . mysqli_insert_id($mysqli); 
+        if ($_POST['dt1'] == $_POST['ct1'] ) { 	
+            echo "<br>  Account Dt=Kt ! <br>  "; 
+        }
 
 }
 
